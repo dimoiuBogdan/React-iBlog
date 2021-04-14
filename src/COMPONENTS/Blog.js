@@ -1,9 +1,11 @@
-import SignOut from "./SignOut.js";
+import MainSection from "./MainSection.js";
+import Navbar from "./Navbar.js";
 
 const Blog = () => {
   return (
-    <div>
-      <SignOut />
+    <div className="w-full min-h-screen">
+      <Navbar />
+      <MainSection />
     </div>
   );
 };
