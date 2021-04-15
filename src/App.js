@@ -25,9 +25,7 @@ const App = () => {
   const [user] = useAuthState(auth);
 
   return (
-    <div className="w-full min-h-screen bg-gray-200">
-      {user ? <Blog /> : <SignIn />}
-    </div>
+    <div className="w-full min-h-screen">{user ? <Blog /> : <SignIn />}</div>
   );
 };
 
