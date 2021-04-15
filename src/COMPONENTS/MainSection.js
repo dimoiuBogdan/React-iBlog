@@ -6,17 +6,17 @@ const MainSection = () => {
       id="main-section"
       className="w-full relative h-60vh flex flex-col items-center justify-center"
     >
-      <h2 className="text-4xl text-center font-semibold text-white mb-4">
+      <h2 className="sm:text-4xl sm:font-semibold text-3xl text-center font-medium text-white mb-4">
         <span className="text-yellow-500">Amazing</span> Tech Articles Written
         By <span className="text-yellow-500">Amazing</span> People
       </h2>
-      <h3 className="text-white text-opacity-75 text-2xl">
+      <h3 className="text-white text-opacity-80 sm:text-2xl text-xl">
         Programming - A.I. - Apps - News
       </h3>
       <img
         className="absolute -bottom-10 left-0 w-full h-40"
         src={waveSvg}
-        alt=""
+        alt="wave-svg"
       />
     </div>
   );

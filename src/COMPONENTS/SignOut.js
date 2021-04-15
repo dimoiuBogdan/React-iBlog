@@ -10,7 +10,7 @@ const SignOut = () => {
           window.confirm("are you sure you want to sign out?");
           auth.signOut();
         }}
-        className="bg-yellow-500 flex items-center shadow-md px-3 py-1 rounded-lg cursor-pointer hover:shadow-lg transition-all transform hover:scale-105"
+        className="bg-yellow-500 flex items-center shadow-md px-3 py-1 rounded-lg cursor-pointer hover:shadow-lg transition-all transform hover:text-yellow-500 hover:scale-105 hover:bg-opacity-0"
       >
         Sign Out <LockIcon className="ml-1" />
       </div>

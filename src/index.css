@@ -21,3 +21,8 @@
   background-size: cover;
   background-position: center;
 }
+
+::selection {
+  color: white;
+  background: rgba(245, 158, 11);
+}
