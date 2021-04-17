@@ -1,6 +1,6 @@
-import useClickOutside from "../HOOKS/useClickOutside";
+import useClickOutside from "../../HOOKS/useClickOutside";
 
-import SignOut from "./SignOut";
+import SignOut from "../LOGIN/SignOut";
 
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import HomeIcon from "@material-ui/icons/Home";

@@ -3,7 +3,7 @@ import "firebase/firestore";
 import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import SignIn from "./COMPONENTS/SignIn";
+import SignIn from "./COMPONENTS/LOGIN/SignIn";
 import Blog from "./COMPONENTS/Blog";
 
 if (!firebase.apps.length) {

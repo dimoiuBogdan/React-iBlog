@@ -26,3 +26,7 @@
   color: white;
   background: rgba(245, 158, 11);
 }
+
+.active-badge {
+  @apply text-white bg-yellow-500 border-yellow-500;
+}

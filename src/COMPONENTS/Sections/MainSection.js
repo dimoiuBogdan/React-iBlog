@@ -1,4 +1,4 @@
-import waveSvg from "../IMAGES/svg.png";
+import waveSvg from "../../IMAGES/svg.png";
 
 const MainSection = () => {
   return (
@@ -14,7 +14,7 @@ const MainSection = () => {
         Programming - A.I. - Apps - News
       </h3>
       <img
-        className="absolute -bottom-10 left-0 w-full h-40"
+        className="absolute -bottom-0 left-0 w-full h-24"
         src={waveSvg}
         alt="wave-svg"
       />
