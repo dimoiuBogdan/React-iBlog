@@ -5,7 +5,10 @@ import HomepagePosts from "./Sections/HomepagePosts";
 
 const Blog = () => {
   return (
-    <div className="w-full min-h-screen">
+    <div
+      id="background"
+      className="w-full min-h-screen bg-blue-50 bg-opacity-75"
+    >
       <Navbar />
       <MainSection />
       <Filters />
@@ -20,4 +23,3 @@ const Blog = () => {
 };
 
 export default Blog;
-// 9134

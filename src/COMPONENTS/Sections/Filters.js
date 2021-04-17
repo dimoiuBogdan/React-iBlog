@@ -30,7 +30,7 @@ const Filters = () => {
   ]);
 
   return (
-    <div className="flex items-center flex-wrap container justify-evenly sm:mb-10 mb-5 mx-auto sm:px-10vw px-0">
+    <div className="flex items-center flex-wrap container justify-evenly sm:my-10 my-5 mx-auto sm:px-10vw px-0">
       {filters.map((filter, index) => (
         <Filter
           title={filter.title}
