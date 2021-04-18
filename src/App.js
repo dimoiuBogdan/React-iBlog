@@ -1,5 +1,4 @@
 import firebase from "firebase/app";
-import "firebase/firestore";
 import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -19,7 +18,6 @@ if (!firebase.apps.length) {
 }
 
 const auth = firebase.auth();
-const firestore = firebase.firestore();
 
 const App = () => {
   const [user] = useAuthState(auth);

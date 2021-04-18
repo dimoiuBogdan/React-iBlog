@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { AnimateSharedLayout } from "framer-motion";
+
 import Filter from "../Section Elements/Filter";
 
-const Filters = () => {
+const Filters = ({ setCurrentFilter }) => {
   const [filters, setFilters] = useState([
     {
       title: "All",
@@ -29,20 +31,33 @@ const Filters = () => {
     },
   ]);
 
+  useEffect(() => {
+    let activeFilter = filters.filter((filter) => filter.active === true);
+    setCurrentFilter(activeFilter[0].title);
+  }, [filters, setCurrentFilter]);
+
+  const toggleFilter = (id) => {
+    setFilters(
+      filters.map((filter, index) => {
+        index === id ? (filter.active = true) : (filter.active = false);
+        return filter;
+      })
+    );
+  };
+
   return (
-    <div className="flex items-center flex-wrap container justify-evenly sm:my-10 my-5 mx-auto sm:px-10vw px-0">
-      {filters.map((filter, index) => (
-        <Filter
-          title={filter.title}
-          active={filter.active}
-          icon={filter.icon}
-          filters={filters}
-          setFilters={setFilters}
-          key={index}
-          id={index}
-        />
-      ))}
-    </div>
+    <AnimateSharedLayout>
+      <div className="flex items-center flex-wrap container justify-evenly sm:my-10 my-5 mx-auto sm:px-10vw px-0">
+        {filters.map((filter, index) => (
+          <Filter
+            title={filter.title}
+            active={filter.active}
+            toggleFilter={() => toggleFilter(index)}
+            key={index}
+          />
+        ))}
+      </div>
+    </AnimateSharedLayout>
   );
 };
 
