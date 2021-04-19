@@ -2,6 +2,8 @@ import firebase from "firebase/app";
 
 import { useState } from "react";
 
+import { useHistory } from "react-router-dom";
+
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -9,18 +11,21 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 
-const signIn = () => {
-  const auth = firebase.auth();
-  const provider = new firebase.auth.GoogleAuthProvider();
-
-  auth.signInWithPopup(provider);
-};
-
 const SignIn = () => {
   const [expanded, setExpanded] = useState(false);
+  const history = useHistory();
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
+  };
+
+  const signIn = () => {
+    const auth = firebase.auth();
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    auth.signInWithPopup(provider).then(() => {
+      history.push("/");
+    });
   };
 
   return (

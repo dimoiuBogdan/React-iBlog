@@ -14,8 +14,7 @@ const HomepagePosts = ({ filteredBlogs }) => {
       {homepagePosts
         ? homepagePosts.map((post, index) => (
             <div
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              key={index}
               className="sm:w-1/2 w-full md:px-5 sm:px-2 px-5 mb-10 h-36rem md:h-auto"
             >
               <HomepagePost post={post} />

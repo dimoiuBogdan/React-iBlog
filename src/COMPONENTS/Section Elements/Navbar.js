@@ -6,6 +6,8 @@ import AddBoxIcon from "@material-ui/icons/AddBox";
 import HomeIcon from "@material-ui/icons/Home";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
+import { NavLink } from "react-router-dom";
+
 const Navbar = () => {
   const { ref, isVisible, setIsVisible } = useClickOutside(false);
 
@@ -40,15 +42,27 @@ const Navbar = () => {
           flex-col flex transition-all duration-1000 fixed top-0 h-full w-1/3 min-w-30rem border-r-2 border-yellow-500 left-0 bg-black bg-opacity-70 justify-evenly text-2xl items-center
           ${isVisible ? "left-0" : "-left-96 lg:left-0"}`}
         >
-          <h3 className="mx-4 flex items-center cursor-pointer transition-all hover:text-yellow-500 transform hover:scale-105">
+          <NavLink
+            activeClassName="active-link"
+            to="/"
+            className="mx-4 flex items-center cursor-pointer transition-all hover:text-yellow-500 transform hover:scale-105"
+          >
             Home <HomeIcon className="ml-1" />
-          </h3>
-          <h3 className="mx-4 flex items-center cursor-pointer transition-all hover:text-yellow-500 transform hover:scale-105">
+          </NavLink>
+          <NavLink
+            activeClassName="active-link"
+            to="/profile"
+            className="mx-4 flex items-center cursor-pointer transition-all hover:text-yellow-500 transform hover:scale-105"
+          >
             Profile <AccountBoxIcon className="ml-1" />
-          </h3>
-          <h3 className="mx-4 flex items-center lg:mr-8 cursor-pointer transition-all hover:text-yellow-500 transform hover:scale-105">
+          </NavLink>
+          <NavLink
+            activeClassName="active-link"
+            to="/post"
+            className="mx-4 flex items-center lg:mr-8 cursor-pointer transition-all hover:text-yellow-500 transform hover:scale-105"
+          >
             Post <AddBoxIcon className="ml-1" />
-          </h3>
+          </NavLink>
           <SignOut />
         </div>
       </div>

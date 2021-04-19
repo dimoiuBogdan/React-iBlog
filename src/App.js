@@ -5,6 +5,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import SignIn from "./COMPONENTS/LOGIN/SignIn";
 import Blog from "./COMPONENTS/Blog";
 
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 if (!firebase.apps.length) {
   firebase.initializeApp({
     apiKey: "AIzaSyDWJbzv6kjeczZMbWvebYwXPwrsGkd6nyo",
@@ -23,7 +25,17 @@ const App = () => {
   const [user] = useAuthState(auth);
 
   return (
-    <div className="w-full min-h-screen">{user ? <Blog /> : <SignIn />}</div>
+    <Router>
+      <div className="w-full min-h-screen">
+        <Switch>
+          {user ? (
+            <Route path="/" component={Blog} exact />
+          ) : (
+            <Route path="/sign-in" component={SignIn} />
+          )}
+        </Switch>
+      </div>
+    </Router>
   );
 };
 
