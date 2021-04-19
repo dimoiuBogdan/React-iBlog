@@ -9,7 +9,7 @@ const MainSection = () => {
         By <span className="text-yellow-500">Amazing</span> People
       </h2>
       <h3 className="text-white text-opacity-80 sm:text-2xl text-xl">
-        Programming - A.I. - Apps - News
+        Coding - Crpyto - Design - Stocks - News
       </h3>
     </div>
   );

@@ -18,15 +18,15 @@ const Filters = ({ setCurrentFilter }) => {
       active: false,
     },
     {
-      title: "Design",
-      active: false,
-    },
-    {
       title: "Stocks",
       active: false,
     },
     {
-      title: "News",
+      title: "Tech",
+      active: false,
+    },
+    {
+      title: "Resources",
       active: false,
     },
   ]);

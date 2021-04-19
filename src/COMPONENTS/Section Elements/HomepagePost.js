@@ -24,6 +24,7 @@ const HomepagePost = ({ post }) => {
           {toDateTime(date.seconds)[2]}/{toDateTime(date.seconds)[1]}/
           {toDateTime(date.seconds)[0]} - {author}
         </p>
+
         <div id="blog-title-wrap" className="relative">
           <div
             onMouseEnter={() => setShowTitlePopup(true)}
