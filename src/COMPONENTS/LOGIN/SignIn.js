@@ -24,7 +24,7 @@ const SignIn = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
 
     auth.signInWithPopup(provider).then(() => {
-      history.push("/");
+      history.push("/homepage");
     });
   };
 

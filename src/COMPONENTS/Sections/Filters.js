@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { AnimateSharedLayout } from "framer-motion";
+import { useHistory } from "react-router-dom";
 
 import Filter from "../Section Elements/Filter";
 
 const Filters = ({ setCurrentFilter }) => {
+  const history = useHistory();
   const [filters, setFilters] = useState([
     {
       title: "All",

@@ -6,6 +6,7 @@ import SignIn from "./COMPONENTS/LOGIN/SignIn";
 import Blog from "./COMPONENTS/Blog";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PageNotFound from "./COMPONENTS/Sections/PageNotFound";
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -29,10 +30,13 @@ const App = () => {
       <div className="w-full min-h-screen">
         <Switch>
           {user ? (
-            <Route path="/" component={Blog} exact />
+            <Route path="/homepage" component={Blog} exact />
           ) : (
             <Route path="/sign-in" component={SignIn} />
           )}
+          <Route path="*">
+            <PageNotFound />
+          </Route>
         </Switch>
       </div>
     </Router>
