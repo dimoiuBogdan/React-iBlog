@@ -1,13 +1,15 @@
+// Firebase imports
 import firebase from "firebase/app";
 import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-
+// Component imports
 import SignIn from "./COMPONENTS/LOGIN/SignIn";
 import Blog from "./COMPONENTS/Blog";
-
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PageNotFound from "./COMPONENTS/Sections/PageNotFound";
+// Router Imports
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+// Firebase initialization
 if (!firebase.apps.length) {
   firebase.initializeApp({
     apiKey: "AIzaSyDWJbzv6kjeczZMbWvebYwXPwrsGkd6nyo",
@@ -20,9 +22,9 @@ if (!firebase.apps.length) {
   });
 }
 
-const auth = firebase.auth();
-
 const App = () => {
+  const auth = firebase.auth();
+  // User is null if logged out
   const [user] = useAuthState(auth);
 
   return (

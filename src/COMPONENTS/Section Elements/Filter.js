@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const Filter = ({ title, active, toggleFilter }) => {
+  // Animation details
   const spring = {
     type: "spring",
     stiffness: 500,

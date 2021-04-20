@@ -3,11 +3,15 @@ import { AnimateSharedLayout } from "framer-motion";
 
 import Filter from "../Section Elements/Filter";
 
-const Filters = ({ setCurrentFilter, currentFilter }) => {
+const Filters = ({
+  setCurrentFilter,
+  currentFilter /* currentFilter is already set */,
+}) => {
+  // All are false because the active one is already set from query param "filter"
   const [filters, setFilters] = useState([
     {
       title: "All",
-      active: true,
+      active: false,
     },
     {
       title: "Coding",
@@ -33,12 +37,10 @@ const Filters = ({ setCurrentFilter, currentFilter }) => {
 
   useEffect(() => {
     if (currentFilter) {
-      let activeFilterOnLoad = filters.filter(
-        (filter) => filter.title === currentFilter
-      );
       setFilters(
+        // Activate the current filter from the filters array
         filters.map((filter) => {
-          filter.title === activeFilterOnLoad[0].title
+          filter.title === currentFilter
             ? (filter.active = true)
             : (filter.active = false);
           return filter;
@@ -47,11 +49,14 @@ const Filters = ({ setCurrentFilter, currentFilter }) => {
     }
   }, [currentFilter]);
 
+  // Everytime a filter changes, find it (activeFilter) and set it as the currentFilter
+  // This useEffect is needed because at first, no filter is active and so, we must activate one first using the use effect at line ~38
   useEffect(() => {
     let activeFilter = filters.filter((filter) => filter.active === true);
-    setCurrentFilter(activeFilter[0].title);
+    if (activeFilter[0]) setCurrentFilter(activeFilter[0].title);
   }, [filters, setCurrentFilter]);
 
+  // Upon clicking a filter, deactivates every other one
   const toggleFilter = (id) => {
     setFilters(
       filters.map((filter, index) => {

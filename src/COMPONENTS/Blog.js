@@ -1,12 +1,15 @@
+// Components
 import MainSection from "./Sections/MainSection.js";
 import Navbar from "./Section Elements/Navbar";
 import Filters from "./Sections/Filters.js";
 import HomepagePosts from "./Sections/HomepagePosts";
 
+// Firebase
 import firebase from "firebase/app";
 import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
 import "firebase/firestore";
 
+// Router & React
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -34,7 +37,9 @@ const Blog = () => {
   const urlQuery = useQuery();
 
   const getQueryFilter = () => {
+    // Get URL query filter value
     const queryFilter = urlQuery.get("filter");
+    // Set it as currentFilter
     queryFilter ? setCurrentFilter(queryFilter) : setCurrentFilter("All");
   };
 

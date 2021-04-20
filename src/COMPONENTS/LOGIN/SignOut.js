@@ -7,6 +7,7 @@ const SignOut = () => {
   const history = useHistory();
   const auth = firebase.auth();
 
+  // Go to sign-in page after signing out
   const signOut = () => {
     auth.signOut().then(() => {
       history.push("/sign-in");

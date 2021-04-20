@@ -23,6 +23,7 @@ const SignIn = () => {
     const auth = firebase.auth();
     const provider = new firebase.auth.GoogleAuthProvider();
 
+    // After signin in, go to homepage
     auth.signInWithPopup(provider).then(() => {
       history.push("/homepage");
     });
