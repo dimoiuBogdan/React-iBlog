@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { AnimateSharedLayout } from "framer-motion";
-import { useHistory } from "react-router-dom";
 
 import Filter from "../Section Elements/Filter";
 
-const Filters = ({ setCurrentFilter }) => {
-  const history = useHistory();
+const Filters = ({ setCurrentFilter, currentFilter }) => {
   const [filters, setFilters] = useState([
     {
       title: "All",
@@ -32,6 +30,22 @@ const Filters = ({ setCurrentFilter }) => {
       active: false,
     },
   ]);
+
+  useEffect(() => {
+    if (currentFilter) {
+      let activeFilterOnLoad = filters.filter(
+        (filter) => filter.title === currentFilter
+      );
+      setFilters(
+        filters.map((filter) => {
+          filter.title === activeFilterOnLoad[0].title
+            ? (filter.active = true)
+            : (filter.active = false);
+          return filter;
+        })
+      );
+    }
+  }, [currentFilter]);
 
   useEffect(() => {
     let activeFilter = filters.filter((filter) => filter.active === true);

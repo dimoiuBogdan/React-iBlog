@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Filter = ({ title, active, toggleFilter }) => {
   const spring = {
@@ -8,7 +9,8 @@ const Filter = ({ title, active, toggleFilter }) => {
   };
 
   return (
-    <div
+    <Link
+      to={title !== "All" ? `/homepage?filter=${title}` : "/homepage"}
       onClick={toggleFilter}
       className={`${
         active ? "active-badge" : ""
@@ -24,7 +26,7 @@ const Filter = ({ title, active, toggleFilter }) => {
         />
       )}
       {title}
-    </div>
+    </Link>
   );
 };
 
