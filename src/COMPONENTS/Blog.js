@@ -13,7 +13,7 @@ import "firebase/firestore";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const Blog = () => {
+const Blog = ({ user }) => {
   const firestore = firebase.firestore();
   const allBlogsRef = firestore.collection("all-blogs");
   const query = allBlogsRef.orderBy("date");
