@@ -1,12 +1,13 @@
 import useClickOutside from "../../HOOKS/useClickOutside";
-
-import SignOut from "../LOGIN/SignOut";
+import { lazy } from "react";
 
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import HomeIcon from "@material-ui/icons/Home";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 import { NavLink } from "react-router-dom";
+
+const SignOut = lazy(() => import("../LOGIN/SignOut"));
 
 const Navbar = () => {
   const { ref, isVisible, setIsVisible } = useClickOutside(false);

@@ -2,10 +2,8 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-// Component imports
-import SignIn from "./COMPONENTS/LOGIN/SignIn";
-import Blog from "./COMPONENTS/Blog";
-import PageNotFound from "./COMPONENTS/Sections/PageNotFound";
+// React Imports
+import { lazy, Suspense } from "react";
 // Router Imports
 import {
   BrowserRouter as Router,
@@ -13,7 +11,11 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-
+import { useState } from "react";
+// Component imports
+const SignIn = lazy(() => import("./COMPONENTS/LOGIN/SignIn"));
+const Blog = lazy(() => import("./COMPONENTS/Blog"));
+const PageNotFound = lazy(() => import("./COMPONENTS/Sections/PageNotFound"));
 // Firebase initialization
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -30,26 +32,50 @@ if (!firebase.apps.length) {
 const App = () => {
   const auth = firebase.auth();
   // User is null if logged out
-  const [user] = useAuthState(auth);
+  let [user] = useAuthState(auth);
+
+  const [rememberAccountDetails, setRememberAccountDetails] = useState(false);
+
+  if (localStorage.getItem("user") && !user)
+    user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <Router>
       <div className="w-full min-h-screen">
-        <Switch>
-          {user ? (
-            <Route
-              path="/homepage"
-              component={() => <Blog user={user} />}
-              exact
-            />
-          ) : (
-            <Route path="/sign-in" component={SignIn} />
-          )}
-          <Redirect from="" to={user ? "homepage" : "sign-in"} />
-          <Route path="*">
-            <PageNotFound user={user} />
-          </Route>
-        </Switch>
+        <Suspense fallback="Loading...">
+          <Switch>
+            {user ? (
+              <Route
+                path="/homepage"
+                component={() => (
+                  <Blog
+                    user={user}
+                    rememberAccountDetails={rememberAccountDetails}
+                  />
+                )}
+                exact
+              />
+            ) : (
+              <Route
+                path="/sign-in"
+                component={() => (
+                  <SignIn
+                    setRememberAccountDetails={setRememberAccountDetails}
+                    rememberAccountDetails={rememberAccountDetails}
+                  />
+                )}
+              />
+            )}
+            {user ? (
+              <Redirect exact from="/" to="/homepage" />
+            ) : (
+              <Redirect exact from="/" to="/sign-in" />
+            )}
+            <Route path="*">
+              <PageNotFound user={user} />
+            </Route>
+          </Switch>
+        </Suspense>
       </div>
     </Router>
   );

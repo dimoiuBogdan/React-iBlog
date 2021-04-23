@@ -9,6 +9,7 @@ const SignOut = () => {
 
   // Go to sign-in page after signing out
   const signOut = () => {
+    localStorage.removeItem("user");
     auth.signOut().then(() => {
       history.push("/sign-in");
     });

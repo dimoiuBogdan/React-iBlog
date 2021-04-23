@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 
-const SignIn = () => {
+const SignIn = ({ setRememberAccountDetails, rememberAccountDetails }) => {
   const [expanded, setExpanded] = useState(false);
   const history = useHistory();
 
@@ -29,6 +29,10 @@ const SignIn = () => {
     });
   };
 
+  const toggleRemember = () => {
+    setRememberAccountDetails((prev) => !prev);
+  };
+
   return (
     <div
       id="sign-in-wrap"
@@ -42,12 +46,25 @@ const SignIn = () => {
           Amazing Tech Articles Written By Amazing People
         </p>
         <button
-          className="mb-12 flex mx-auto items-center bg-yellow-500 text-white text-4xl px-5 py-2 rounded-md transition-all duration-300 shadow-md focus:outline-none hover:shadow-xl hover:text-yellow-500 hover:bg-opacity-0 hover:border-yellow-500 border-4"
+          className="mb-3 flex mx-auto items-center bg-yellow-500 text-white text-4xl px-5 py-2 rounded-md transition-all duration-300 shadow-md focus:outline-none hover:shadow-xl hover:text-yellow-500 hover:bg-opacity-0 hover:border-yellow-500 border-4"
           onClick={signIn}
         >
           Sign In
           <LockOpenIcon className="ml-3" fontSize="large" />
         </button>
+        <div
+          className="mb-8 cursor-pointer max-w-max mx-auto flex items-center justify-center select-none"
+          onClick={toggleRemember}
+        >
+          <span className="mr-1 text-gray-500" htmlFor="remember">
+            Remember Account
+          </span>
+          <div
+            className={`h-4 flex items-center justify-center border-2 w-4 rounded-sm border-yellow-500`}
+          >
+            {rememberAccountDetails ? <span>✔️</span> : ""}
+          </div>
+        </div>
         <div className="max-w-3xl">
           <Accordion
             expanded={expanded === "panel1"}
