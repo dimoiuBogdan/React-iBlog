@@ -34,8 +34,6 @@ const App = () => {
   // User is null if logged out
   let [user] = useAuthState(auth);
 
-  const [rememberAccountDetails, setRememberAccountDetails] = useState(false);
-
   if (localStorage.getItem("user") && !user)
     user = JSON.parse(localStorage.getItem("user"));
 
@@ -47,24 +45,11 @@ const App = () => {
             {user ? (
               <Route
                 path="/homepage"
-                component={() => (
-                  <Blog
-                    user={user}
-                    rememberAccountDetails={rememberAccountDetails}
-                  />
-                )}
+                component={() => <Blog user={user} />}
                 exact
               />
             ) : (
-              <Route
-                path="/sign-in"
-                component={() => (
-                  <SignIn
-                    setRememberAccountDetails={setRememberAccountDetails}
-                    rememberAccountDetails={rememberAccountDetails}
-                  />
-                )}
-              />
+              <Route path="/sign-in" component={() => <SignIn />} />
             )}
             {user ? (
               <Redirect exact from="/" to="/homepage" />

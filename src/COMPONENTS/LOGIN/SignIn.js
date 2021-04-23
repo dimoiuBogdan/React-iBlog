@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 
-const SignIn = ({ setRememberAccountDetails, rememberAccountDetails }) => {
+const SignIn = () => {
   const [expanded, setExpanded] = useState(false);
   const history = useHistory();
 
@@ -27,10 +27,6 @@ const SignIn = ({ setRememberAccountDetails, rememberAccountDetails }) => {
     auth.signInWithPopup(provider).then(() => {
       history.push("/homepage");
     });
-  };
-
-  const toggleRemember = () => {
-    setRememberAccountDetails((prev) => !prev);
   };
 
   return (
@@ -52,19 +48,6 @@ const SignIn = ({ setRememberAccountDetails, rememberAccountDetails }) => {
           Sign In
           <LockOpenIcon className="ml-3" fontSize="large" />
         </button>
-        <div
-          className="mb-8 cursor-pointer max-w-max mx-auto flex items-center justify-center select-none"
-          onClick={toggleRemember}
-        >
-          <span className="mr-1 text-gray-500" htmlFor="remember">
-            Remember Account
-          </span>
-          <div
-            className={`h-4 flex items-center justify-center border-2 w-4 rounded-sm border-yellow-500`}
-          >
-            {rememberAccountDetails ? <span>✔️</span> : ""}
-          </div>
-        </div>
         <div className="max-w-3xl">
           <Accordion
             expanded={expanded === "panel1"}

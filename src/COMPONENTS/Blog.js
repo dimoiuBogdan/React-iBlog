@@ -42,12 +42,9 @@ const Blog = ({ user, rememberAccoutDetails }) => {
   };
 
   useEffect(() => {
-    let localStorageUserData;
-    if (rememberAccoutDetails) {
-      localStorageUserData = localStorage.getItem("user");
-      if (!localStorageUserData)
-        localStorage.setItem("user", JSON.stringify(user));
-    }
+    const localStorageUserData = localStorage.getItem("user");
+    if (!localStorageUserData)
+      localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
   useEffect(() => {
