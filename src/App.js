@@ -14,6 +14,7 @@ import {
 // Component imports
 const SignIn = lazy(() => import("./COMPONENTS/LOGIN/SignIn"));
 const Blog = lazy(() => import("./COMPONENTS/Blog"));
+const SinglePost = lazy(() => import("./COMPONENTS/SINGLE_POST/SinglePost"));
 const PageNotFound = lazy(() =>
   import("./COMPONENTS/HOMEPAGE/Sections/PageNotFound")
 );
@@ -50,13 +51,14 @@ const App = () => {
                 exact
               />
             ) : (
-              <Route path="/sign-in" component={() => <SignIn />} />
+              <Route path="/sign-in" component={SignIn} />
             )}
             {user ? (
               <Redirect exact from="/" to="/homepage" />
             ) : (
               <Redirect exact from="/" to="/sign-in" />
             )}
+            <Route path="/post/:id" component={SinglePost} />
             <Route path="*">
               <PageNotFound user={user} />
             </Route>

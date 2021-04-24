@@ -44,6 +44,7 @@ const Navbar = () => {
           ${isVisible ? "left-0" : "-left-96 lg:left-0"}`}
         >
           <NavLink
+            exact
             activeClassName="active-link"
             to="/"
             className="mx-4 flex items-center cursor-pointer transition-all hover:text-yellow-500 transform hover:scale-105"
@@ -59,7 +60,7 @@ const Navbar = () => {
           </NavLink>
           <NavLink
             activeClassName="active-link"
-            to="/post"
+            to="/add-post"
             className="mx-4 flex items-center lg:mr-8 cursor-pointer transition-all hover:text-yellow-500 transform hover:scale-105"
           >
             Post <AddBoxIcon className="ml-1" />

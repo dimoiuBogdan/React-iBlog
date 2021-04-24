@@ -5,6 +5,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import firebase from "firebase/app";
 import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
 import "firebase/firestore";
+
 // Components
 const Navbar = lazy(() => import("./HOMEPAGE/Section Elements/Navbar"));
 const Filters = lazy(() => import("./HOMEPAGE/Sections/Filters.js"));
@@ -59,7 +60,6 @@ const Blog = ({ user }) => {
     >
       <Navbar />
       <MainSection />
-
       <Filters
         currentFilter={currentFilter}
         setCurrentFilter={setCurrentFilter}
