@@ -6,16 +6,16 @@ import firebase from "firebase/app";
 import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
 import "firebase/firestore";
 // Components
-const Navbar = lazy(() => import("./Section Elements/Navbar"));
-const Filters = lazy(() => import("./Sections/Filters.js"));
-const HomepagePosts = lazy(() => import("./Sections/HomepagePosts"));
-const MainSection = lazy(() => import("./Sections/MainSection.js"));
+const Navbar = lazy(() => import("./HOMEPAGE/Section Elements/Navbar"));
+const Filters = lazy(() => import("./HOMEPAGE/Sections/Filters.js"));
+const HomepagePosts = lazy(() => import("./HOMEPAGE/Sections/HomepagePosts"));
+const MainSection = lazy(() => import("./HOMEPAGE/Sections/MainSection.js"));
 
-const Blog = ({ user, rememberAccoutDetails }) => {
+const Blog = ({ user }) => {
   const firestore = firebase.firestore();
   const allBlogsRef = firestore.collection("all-blogs");
   const query = allBlogsRef.orderBy("date");
-  let [allBlogs] = useCollectionDataOnce(query, { idField: "id" });
+  const [allBlogs] = useCollectionDataOnce(query, { idField: "id" });
 
   const [currentFilter, setCurrentFilter] = useState("");
   const [filteredBlogs, setFilteredBlogs] = useState([]);
@@ -59,19 +59,14 @@ const Blog = ({ user, rememberAccoutDetails }) => {
     >
       <Navbar />
       <MainSection />
+
+      <Filters
+        currentFilter={currentFilter}
+        setCurrentFilter={setCurrentFilter}
+      />
       <Suspense fallback="Loading Content...">
-        <Filters
-          currentFilter={currentFilter}
-          setCurrentFilter={setCurrentFilter}
-        />
         <div className="container mx-auto flex items-center">
-          {filteredBlogs ? (
-            <HomepagePosts filteredBlogs={filteredBlogs} />
-          ) : (
-            <h2 className="w-full text-4xl font-medium text-yellow-500">
-              Loading...
-            </h2>
-          )}
+          {filteredBlogs && <HomepagePosts filteredBlogs={filteredBlogs} />}
           {filteredBlogs && (
             <div className="w-1/5 text-center h-full hidden lg:block bg-yellow-50">
               Sidebar

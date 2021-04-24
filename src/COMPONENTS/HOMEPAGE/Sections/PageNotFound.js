@@ -1,4 +1,4 @@
-import notFoundPNG from "../../IMAGES/taxi-page-not-found-1.png";
+import notFoundPNG from "../../../IMAGES/taxi-page-not-found-1.png";
 import { NavLink } from "react-router-dom";
 
 const PageNotFound = ({ user }) => {

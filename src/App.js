@@ -11,11 +11,12 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { useState } from "react";
 // Component imports
 const SignIn = lazy(() => import("./COMPONENTS/LOGIN/SignIn"));
 const Blog = lazy(() => import("./COMPONENTS/Blog"));
-const PageNotFound = lazy(() => import("./COMPONENTS/Sections/PageNotFound"));
+const PageNotFound = lazy(() =>
+  import("./COMPONENTS/HOMEPAGE/Sections/PageNotFound")
+);
 // Firebase initialization
 if (!firebase.apps.length) {
   firebase.initializeApp({
