@@ -58,7 +58,9 @@ const App = () => {
             ) : (
               <Redirect exact from="/" to="/sign-in" />
             )}
-            <Route path="/post/:id" component={SinglePost} />
+            {user && (
+              <Route path="/post/:id" component={() => <SinglePost />} />
+            )}
             <Route path="*">
               <PageNotFound user={user} />
             </Route>

@@ -5,6 +5,7 @@ import "firebase/firestore";
 
 import useDateTime from "../../HOOKS/useToDateTime";
 import Navbar from "../HOMEPAGE/Section Elements/Navbar";
+import RelatedPosts from "./RelatedPosts";
 
 const SinglePost = () => {
   const db = firebase.firestore();
@@ -20,19 +21,17 @@ const SinglePost = () => {
       .doc(postID)
       .get()
       .then((snapshot) => {
-        setPostDetails(snapshot.data());
-        setReadingTime(
-          Math.ceil(
-            postDetails.content?.split(" ").length / averageWordsPerMinute
-          )
-        );
+        // setPostDetails is async so I used this syntax
+        setPostDetails(() => {
+          setReadingTime(
+            Math.ceil(
+              snapshot.data().content.split(" ").length / averageWordsPerMinute
+            )
+          );
+          return snapshot.data();
+        });
         setDisplayContent(true);
       });
-    // Number of words in content
-    return () => {
-      setPostDetails({});
-      setDisplayContent(false);
-    };
   }, []);
 
   return (
@@ -79,9 +78,10 @@ const SinglePost = () => {
                 </h2>
               </div>
               <h2 className="text-center text-3xl font-medium text-gray-700 mb-3">
-                Should You Learn Angular Or React?
+                {postDetails.subtitle || "Subtitle"}
               </h2>
-              <p>{postDetails.content}</p>
+              <p className="mb-14">{postDetails.content}</p>
+              <RelatedPosts />
             </div>
             <div className="w-1/5 text-center h-full hidden lg:block bg-yellow-500">
               Sidebar

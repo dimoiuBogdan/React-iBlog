@@ -1,5 +1,5 @@
 // Router & React
-import { useLocation } from "react-router-dom";
+import { useLocation, Route, Switch, Router } from "react-router-dom";
 import { useState, useEffect, lazy, Suspense } from "react";
 // Firebase
 import firebase from "firebase/app";
