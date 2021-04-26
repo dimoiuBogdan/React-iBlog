@@ -7,7 +7,7 @@ import useDateTime from "../../HOOKS/useToDateTime";
 import Navbar from "../HOMEPAGE/Section Elements/Navbar";
 import RelatedPosts from "./RelatedPosts";
 
-const SinglePost = () => {
+const SinglePost = ({ allBlogs }) => {
   const db = firebase.firestore();
   const postID = useRouteMatch("/post/:id").params.id;
   const [postDetails, setPostDetails] = useState({});
@@ -81,7 +81,7 @@ const SinglePost = () => {
                 {postDetails.subtitle || "Subtitle"}
               </h2>
               <p className="mb-14">{postDetails.content}</p>
-              <RelatedPosts />
+              <RelatedPosts allBlogs={allBlogs} postTags={postDetails.tags} />
             </div>
             <div className="w-1/5 text-center h-full hidden lg:block bg-yellow-500">
               Sidebar

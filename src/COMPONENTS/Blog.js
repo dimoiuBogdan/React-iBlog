@@ -1,10 +1,6 @@
 // Router & React
-import { useLocation, Route, Switch, Router } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState, useEffect, lazy, Suspense } from "react";
-// Firebase
-import firebase from "firebase/app";
-import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
-import "firebase/firestore";
 
 // Components
 const Navbar = lazy(() => import("./HOMEPAGE/Section Elements/Navbar"));
@@ -12,12 +8,7 @@ const Filters = lazy(() => import("./HOMEPAGE/Sections/Filters.js"));
 const HomepagePosts = lazy(() => import("./HOMEPAGE/Sections/HomepagePosts"));
 const MainSection = lazy(() => import("./HOMEPAGE/Sections/MainSection.js"));
 
-const Blog = ({ user }) => {
-  const firestore = firebase.firestore();
-  const allBlogsRef = firestore.collection("all-blogs");
-  const query = allBlogsRef.orderBy("date");
-  const [allBlogs] = useCollectionDataOnce(query, { idField: "id" });
-
+const Blog = ({ user, allBlogs }) => {
   const [currentFilter, setCurrentFilter] = useState("");
   const [filteredBlogs, setFilteredBlogs] = useState([]);
 

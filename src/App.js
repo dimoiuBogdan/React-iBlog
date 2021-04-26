@@ -1,7 +1,9 @@
 // Firebase imports
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
 // React Imports
 import { lazy, Suspense } from "react";
 // Router Imports
@@ -39,6 +41,11 @@ const App = () => {
   if (localStorage.getItem("user") && !user)
     user = JSON.parse(localStorage.getItem("user"));
 
+  const firestore = firebase.firestore();
+  const allBlogsRef = firestore.collection("all-blogs");
+  const query = allBlogsRef.orderBy("date");
+  const [allBlogs] = useCollectionDataOnce(query, { idField: "id" });
+
   return (
     <Router>
       <div className="w-full min-h-screen">
@@ -47,7 +54,7 @@ const App = () => {
             {user ? (
               <Route
                 path="/homepage"
-                component={() => <Blog user={user} />}
+                component={() => <Blog user={user} allBlogs={allBlogs} />}
                 exact
               />
             ) : (
@@ -59,7 +66,10 @@ const App = () => {
               <Redirect exact from="/" to="/sign-in" />
             )}
             {user && (
-              <Route path="/post/:id" component={() => <SinglePost />} />
+              <Route
+                path="/post/:id"
+                component={() => <SinglePost allBlogs={allBlogs} />}
+              />
             )}
             <Route path="*">
               <PageNotFound user={user} />
