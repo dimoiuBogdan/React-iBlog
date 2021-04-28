@@ -17,7 +17,7 @@ const HomepagePost = ({ post }) => {
             {day}/{month}/{year} - {author}
           </p>
 
-          <div className="font-medium text-xl mb-3 overflow-hidden w-max max-w-full text-gray-600">
+          <div className="font-medium text-xl h-8 overflow-hidden w-max max-w-full text-gray-600">
             {title}
           </div>
           <p className="text-gray-600 overflow-hidden text-justify h-48">

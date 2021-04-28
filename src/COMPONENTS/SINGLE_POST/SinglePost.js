@@ -16,6 +16,8 @@ const SinglePost = ({ allBlogs }) => {
   const { year, month, day } = useDateTime(postDetails.date);
   const averageWordsPerMinute = 250;
 
+  // use postID as a param so that everytime we click on a post, it will use that ID
+  // ( figured it out after working on related posts where blog.id was the actual post and postID was the post we clicked on )
   const getPostData = (postID) => {
     db.collection("all-blogs")
       .doc(postID)
