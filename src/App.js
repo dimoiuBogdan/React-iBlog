@@ -67,6 +67,7 @@ const App = () => {
             )}
             {user && (
               <Route
+                exact
                 path="/post/:id"
                 component={() => <SinglePost allBlogs={allBlogs} />}
               />

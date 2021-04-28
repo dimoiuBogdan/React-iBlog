@@ -16,7 +16,7 @@ const SinglePost = ({ allBlogs }) => {
   const { year, month, day } = useDateTime(postDetails.date);
   const averageWordsPerMinute = 250;
 
-  useEffect(() => {
+  const getPostData = (postID) => {
     db.collection("all-blogs")
       .doc(postID)
       .get()
@@ -32,7 +32,11 @@ const SinglePost = ({ allBlogs }) => {
         });
         setDisplayContent(true);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    getPostData(postID);
+  }, [postID]);
 
   return (
     <div>
@@ -81,7 +85,12 @@ const SinglePost = ({ allBlogs }) => {
                 {postDetails.subtitle || "Subtitle"}
               </h2>
               <p className="mb-14">{postDetails.content}</p>
-              <RelatedPosts allBlogs={allBlogs} postTags={postDetails.tags} />
+              <RelatedPosts
+                getPostData={getPostData}
+                allBlogs={allBlogs}
+                postTags={postDetails.tags}
+                postID={postID}
+              />
             </div>
             <div className="w-1/5 text-center h-full hidden lg:block bg-yellow-500">
               Sidebar

@@ -46,7 +46,7 @@ const Navbar = () => {
           <NavLink
             exact
             activeClassName="active-link"
-            to="/"
+            to="/homepage"
             className="mx-4 flex items-center cursor-pointer transition-all hover:text-yellow-500 transform hover:scale-105"
           >
             Home <HomeIcon className="ml-1" />

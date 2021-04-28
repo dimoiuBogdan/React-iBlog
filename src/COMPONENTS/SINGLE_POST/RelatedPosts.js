@@ -1,28 +1,33 @@
 import { useEffect, useState } from "react";
 import RelatedPost from "./RelatedPost";
+import { Link } from "react-router-dom";
 
-const RelatedPosts = ({ allBlogs, postTags }) => {
+const RelatedPosts = ({ allBlogs, postTags, postID, getPostData }) => {
   const [relatedBlogsByTags, setRelatedBlogsByTags] = useState([]);
 
-  const filterBlogsByTags = async () => {
+  const filterBlogsByTags = async (postID) => {
     if (allBlogs) {
-      const filteredBlogs = await allBlogs.filter((blog) =>
-        blog.tags.includes(...postTags)
+      // Filter in allBlogs and returns every blog that contains at least one (...postTags) tag of the current post
+      const filteredBlogs = await allBlogs.filter(
+        // blog.id !== postID to remove the current post from related posts
+        (blog) => blog.tags.includes(...postTags) && blog.id !== postID
       );
       setRelatedBlogsByTags(filteredBlogs);
     }
   };
 
   useEffect(() => {
-    filterBlogsByTags();
-  }, []);
+    filterBlogsByTags(postID);
+  }, [postID]);
 
   return (
     <div>
       <h2 className="text-2xl mb-3">Related posts</h2>
       <div className="flex overflow-x-hidden">
         {relatedBlogsByTags.map((blog, index) => (
-          <RelatedPost key={index} blog={blog} />
+          <Link to={blog.id} onClick={() => getPostData(blog.id)}>
+            <RelatedPost key={index} blog={blog} />
+          </Link>
         ))}
       </div>
     </div>
