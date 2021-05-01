@@ -14,6 +14,9 @@ import FormatItalicIcon from "@material-ui/icons/FormatItalic";
 import FormatSizeIcon from "@material-ui/icons/FormatSize";
 import CodeIcon from "@material-ui/icons/Code";
 import LinkIcon from "@material-ui/icons/Link";
+import WritePanel from "./WritePanel";
+import PreviewPanel from "./PreviewPanel";
+import GuidePanel from "./GuidePanel";
 
 // Titlu - Minim 10 caractere maxim 76
 // Subtitlu - Minim 10, maxim 76
@@ -23,6 +26,8 @@ const AddPost = () => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [content, setContent] = useState("");
+
+  const [activePanel, setActivePanel] = useState("Write");
 
   const {
     ref,
@@ -56,15 +61,30 @@ const AddPost = () => {
         />
         <div className="my-6 shadow-lg p-2 border-gray-200 border-2 rounded-md flex items-center justify-between">
           <div className="flex items-center font-medium text-gray-500">
-            <h3 className="mr-2 flex items-center cursor-pointer transition-all hover:bg-gray-200 px-1 rounded-md">
+            <h3
+              onClick={() => {
+                setActivePanel("Write");
+              }}
+              className="mr-2 flex items-center cursor-pointer transition-all hover:bg-gray-200 px-1 rounded-md"
+            >
               <CreateIcon fontSize="small" />
               Write
             </h3>
-            <h3 className="mr-2 flex items-center cursor-pointer transition-all hover:bg-gray-200 px-1 rounded-md">
+            <h3
+              onClick={() => {
+                setActivePanel("Preview");
+              }}
+              className="mr-2 flex items-center cursor-pointer transition-all hover:bg-gray-200 px-1 rounded-md"
+            >
               <VisibilityIcon fontSize="small" />
               Preview
             </h3>
-            <h3 className="mr-2 flex items-center cursor-pointer transition-all hover:bg-gray-200 px-1 rounded-md">
+            <h3
+              onClick={() => {
+                setActivePanel("Guide");
+              }}
+              className="mr-2 flex items-center cursor-pointer transition-all hover:bg-gray-200 px-1 rounded-md"
+            >
               <HelpIcon fontSize="small" />
               Guide
             </h3>
@@ -96,12 +116,15 @@ const AddPost = () => {
             <LinkIcon className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200" />
           </div>
         </div>
-        <textarea
-          cols="30"
-          rows="10"
-          placeholder="Tell your story..."
-          className="w-full bg-transparent p-2 text-xl font-medium text-gray-500 focus:outline-none"
-        ></textarea>
+        {activePanel === "Write" ? (
+          <WritePanel />
+        ) : activePanel === "Preview" ? (
+          <PreviewPanel />
+        ) : activePanel === "Guide" ? (
+          <GuidePanel />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

@@ -26,6 +26,7 @@ const RelatedPosts = ({ allBlogs, postTags, postID, getPostData }) => {
       <div className="flex overflow-x-scroll">
         {relatedBlogsByTags.map((blog, index) => (
           <Link
+            key={index}
             to={blog.id}
             onClick={() => {
               window.scrollTo({ top: 0, behavior: "smooth" });
