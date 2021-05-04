@@ -29,6 +29,7 @@ const WritePanel = ({
     else displayError("Maximum 4 tags");
   };
 
+  // Show the error modal and hide it after 3 seconds
   const displayError = (error) => {
     setErrorModal(error);
     setTimeout(() => {

@@ -23,6 +23,7 @@ const AddPost = () => {
   const [subtitle, setSubtitle] = useState("");
   const [content, setContent] = useState("");
   const [tags, setTags] = useState([]);
+  // Used id's so I can work with them in writePanel.js
   const [availableTags] = useState([
     { text: "Coding", id: 0 },
     { text: "Tech", id: 1 },
