@@ -2,10 +2,22 @@ import React from "react";
 
 const GuidePanel = () => {
   return (
-    <div>
+    <div className="px-3">
       <h3 className="text-2xl text-gray-500 my-6">
         This is a guide to help you understand our writing features
       </h3>
+      <div className="my-10">
+        <h2 className="text-3xl font-medium text-gray-700 mb-2">Rules</h2>
+        <pre className="bg-gray-600 text-white text-lg py-4 px-6 rounded-lg shadow-md">
+          <p className="my-4">
+            Title must be between 10 and 76 characters long
+          </p>
+          <p className="my-4">
+            Title must be between 10 and 76 characters long
+          </p>
+          <p className="my-4">Content must have at least 700 characters</p>
+        </pre>
+      </div>
       <div className="my-10">
         <h2 className="text-3xl font-medium text-gray-700 mb-2">Headers</h2>
         <p className="text-xl mb-4">
@@ -35,21 +47,19 @@ const GuidePanel = () => {
           Text formatting
         </h2>
         <p className="text-xl mb-4">
-          <div>
-            <span className="font-semibold">Bold</span> : Wrap the text with
-            double astricks <span className="text-yellow-500">**</span> to make
-            it bold. We will use{" "}
-            <span className="text-yellow-500">{`<strong>`}</span> while parsing.
-            For example: <span className="font-semibold">**Bold text**</span>
-          </div>
-          <div className="mt-2">
+          <span className="font-semibold">Bold</span> : Wrap the text with
+          double astricks <span className="text-yellow-500">**</span> to make it
+          bold. We will use{" "}
+          <span className="text-yellow-500">{`<strong>`}</span> while parsing.
+          For example: <span className="font-semibold">**Bold text**</span>
+          <span className="mt-2">
             <span className="italic">Italics</span> : Wrap the text with single
             astricks character <span className="text-yellow-500">*</span> to
             make it italics. For example:{" "}
             <span className="italic">*Italic text*</span> . We will wrap the
             text with <span className="text-yellow-500">{`<em>`}</span> tag
             while parsing.
-          </div>
+          </span>
         </p>
       </div>
       <div className="mt-10 pb-10">

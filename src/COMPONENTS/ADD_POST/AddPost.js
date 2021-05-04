@@ -4,7 +4,6 @@ import { useState } from "react";
 
 // Icons
 import PhotoIcon from "@material-ui/icons/Photo";
-import TitleIcon from "@material-ui/icons/Title";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import CreateIcon from "@material-ui/icons/Create";
 import VisibilityIcon from "@material-ui/icons/Visibility";
@@ -18,14 +17,23 @@ import WritePanel from "./WritePanel";
 import PreviewPanel from "./PreviewPanel";
 import GuidePanel from "./GuidePanel";
 
-// Titlu - Minim 10 caractere maxim 76
-// Subtitlu - Minim 10, maxim 76
-// Text - Minim 700
 // # H1 , ## H2, ### H3, **text** bold, ** italic, ```text``` code, [text](link)
 const AddPost = () => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [content, setContent] = useState("");
+  const [tags, setTags] = useState([]);
+  const [availableTags] = useState([
+    { text: "Coding", id: 0 },
+    { text: "Tech", id: 1 },
+    { text: "Crypto", id: 2 },
+    { text: "Stocks", id: 3 },
+    { text: "Resources", id: 4 },
+  ]);
+
+  const [titleError, setTitleError] = useState("");
+  const [subtitleError, setSubtitleError] = useState("");
+  const [contentError, setContentError] = useState("");
 
   const [activePanel, setActivePanel] = useState("Write");
 
@@ -35,30 +43,58 @@ const AddPost = () => {
     setIsVisible: setShowHeadingMenu,
   } = useClickOutside(false);
 
+  const updateTitle = (e) => {
+    setTitle(e.target.value);
+    title.length < 10 || title.length > 76
+      ? setTitleError("Title must be between 10 and 76 characters long")
+      : setTitleError("");
+  };
+
+  const updateSubtitle = (e) => {
+    setSubtitle(e.target.value);
+    subtitle.length < 10 || subtitle.length > 76
+      ? setSubtitleError("Subtitle must be between 10 and 76 characters long")
+      : setSubtitleError("");
+  };
+
+  const updateContent = (e) => {
+    setContent(e.target.value);
+    content.length < 700
+      ? setContentError("Content must be at least 700 characters long")
+      : setContentError("");
+  };
+
   return (
     <div className="w-full min-h-screen bg-blue-50 bg-opacity-75">
       <Navbar solid />
       <div className="lg:max-w-4xl container w-full mx-auto pt-20">
         <div className="flex items-center justify-between mb-8 mt-4">
-          <button className="mr-8 font-medium text-lg text-gray-500 hover:bg-gray-200 rounded-md p-1 transition-all">
+          <label className="mr-8 font-medium text-lg text-gray-500 hover:bg-gray-200 rounded-md p-1 cursor-pointer transition-all">
             <PhotoIcon />
-            Add Cover Photo
-          </button>
-          <button className="font-medium text-lg text-gray-500 shadow-md p-1 rounded-md transition-all hover:shadow-lg">
+            <span>Add Cover Photo</span>
+            <input type="file" className="hidden" />
+          </label>
+          <button className="font-medium text-xl text-gray-500 shadow-md px-3 py-1 rounded-md transition-all hover:shadow-lg">
             <AddBoxIcon />
             Post
           </button>
         </div>
         <input
           type="text"
-          className="w-full bg-transparent p-2 font-medium focus:outline-none text-3xl text-gray-600"
+          className="w-full bg-transparent py-2 font-medium focus:outline-none text-3xl text-gray-600"
           placeholder="Title..."
+          onChange={updateTitle}
+          value={title}
         />
+        <p className="text-red-500">{titleError}</p>
         <input
           type="text"
-          className="w-full bg-transparent p-2 focus:outline-none text-2xl text-gray-600"
+          className="w-full bg-transparent py-2 focus:outline-none text-2xl text-gray-600"
           placeholder="Enter Subtitle..."
+          onChange={updateSubtitle}
+          value={subtitle}
         />
+        <p className="text-red-500">{subtitleError}</p>
         <div className="my-6 shadow-lg p-2 border-gray-200 border-2 rounded-md flex items-center justify-between">
           <div className="flex items-center font-medium text-gray-500">
             <h3
@@ -117,7 +153,14 @@ const AddPost = () => {
           </div>
         </div>
         {activePanel === "Write" ? (
-          <WritePanel />
+          <WritePanel
+            tags={tags}
+            setTags={setTags}
+            availableTags={availableTags}
+            updateContent={updateContent}
+            contentError={contentError}
+            content={content}
+          />
         ) : activePanel === "Preview" ? (
           <PreviewPanel />
         ) : activePanel === "Guide" ? (
