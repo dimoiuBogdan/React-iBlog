@@ -1,6 +1,6 @@
 import Navbar from "../HOMEPAGE/Section Elements/Navbar";
 import useClickOutside from "../../HOOKS/useClickOutside";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 // Icons
 import PhotoIcon from "@material-ui/icons/Photo";
@@ -17,7 +17,6 @@ import WritePanel from "./WritePanel";
 import PreviewPanel from "./PreviewPanel";
 import GuidePanel from "./GuidePanel";
 
-// # H1 , ## H2, ### H3, **text** bold, ** italic, ```text``` code, [text](link)
 const AddPost = () => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
@@ -31,6 +30,7 @@ const AddPost = () => {
     { text: "Stocks", id: 3 },
     { text: "Resources", id: 4 },
   ]);
+  const [textareaRef, setTextareaRef] = useState(null);
 
   const [titleError, setTitleError] = useState("");
   const [subtitleError, setSubtitleError] = useState("");
@@ -43,6 +43,18 @@ const AddPost = () => {
     isVisible: showHeadingMenu,
     setIsVisible: setShowHeadingMenu,
   } = useClickOutside(false);
+
+  const addContentFromBarButtons = (addedContent) => {
+    const mouseStartPos = textareaRef.selectionStart;
+    const mouseEndPos = textareaRef.selectionEnd;
+    const updatedContent =
+      content.substring(0, mouseStartPos) +
+      addedContent +
+      content.substring(mouseEndPos, content.length);
+    setContent(updatedContent);
+    textareaRef.focus();
+    textareaRef.setSelectionRange(2, 2);
+  };
 
   const updateTitle = (e) => {
     setTitle(e.target.value);
@@ -126,32 +138,54 @@ const AddPost = () => {
               Guide
             </h3>
           </div>
-          <div>
-            <span className="relative">
-              <FormatSizeIcon
-                ref={ref}
-                onClick={() => setShowHeadingMenu(!showHeadingMenu)}
+          {activePanel === "Write" && (
+            <div>
+              <span className="relative" ref={ref}>
+                <FormatSizeIcon
+                  onClick={() => setShowHeadingMenu(!showHeadingMenu)}
+                  className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200"
+                />
+                {showHeadingMenu && (
+                  <div className="absolute bg-blue-50 z-20 text-lg shadow-lg rounded-sm top-7 overflow-hidden">
+                    <h2
+                      onClick={() => addContentFromBarButtons("#")}
+                      className="py-1 pl-2 pr-12 transition-all cursor-pointer hover:bg-blue-100"
+                    >
+                      H1
+                    </h2>
+                    <h2
+                      onClick={() => addContentFromBarButtons("##")}
+                      className="py-1 pl-2 pr-12 transition-all cursor-pointer hover:bg-blue-100"
+                    >
+                      H2
+                    </h2>
+                    <h2
+                      onClick={() => addContentFromBarButtons("###")}
+                      className="py-1 pl-2 pr-12 transition-all cursor-pointer hover:bg-blue-100"
+                    >
+                      H3
+                    </h2>
+                  </div>
+                )}
+              </span>
+              <FormatBoldIcon
+                onClick={() => addContentFromBarButtons(" ** ** ")}
                 className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200"
               />
-              {showHeadingMenu && (
-                <div className="absolute bg-blue-50 z-20 text-lg shadow-lg rounded-sm top-7 overflow-hidden">
-                  <h2 className="py-1 pl-2 pr-12 transition-all cursor-pointer hover:bg-blue-100">
-                    H1
-                  </h2>
-                  <h2 className="py-1 pl-2 pr-12 transition-all cursor-pointer hover:bg-blue-100">
-                    H2
-                  </h2>
-                  <h2 className="py-1 pl-2 pr-12 transition-all cursor-pointer hover:bg-blue-100">
-                    H3
-                  </h2>
-                </div>
-              )}
-            </span>
-            <FormatBoldIcon className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200" />
-            <FormatItalicIcon className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200" />
-            <CodeIcon className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200" />
-            <LinkIcon className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200" />
-          </div>
+              <FormatItalicIcon
+                onClick={() => addContentFromBarButtons(" * * ")}
+                className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200"
+              />
+              <CodeIcon
+                onClick={() => addContentFromBarButtons("``` ```")}
+                className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200"
+              />
+              <LinkIcon
+                onClick={() => addContentFromBarButtons(" (text)[link] ")}
+                className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200"
+              />
+            </div>
+          )}
         </div>
         {activePanel === "Write" ? (
           <WritePanel
@@ -161,6 +195,7 @@ const AddPost = () => {
             updateContent={updateContent}
             contentError={contentError}
             content={content}
+            setTextareaRef={setTextareaRef}
           />
         ) : activePanel === "Preview" ? (
           <PreviewPanel />

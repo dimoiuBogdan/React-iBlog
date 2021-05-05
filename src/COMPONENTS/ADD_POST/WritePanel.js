@@ -1,8 +1,8 @@
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import useClickOutside from "../../HOOKS/useClickOutside";
-
+// # H1 , ## H2, ### H3, **text** bold, ** italic, ```text``` code, [text](link)
 const WritePanel = ({
   contentError,
   updateContent,
@@ -10,6 +10,7 @@ const WritePanel = ({
   tags,
   setTags,
   availableTags,
+  setTextareaRef,
 }) => {
   const [errorModal, setErrorModal] = useState("");
 
@@ -107,8 +108,9 @@ const WritePanel = ({
           {errorModal}
         </p>
       )}
-      <p className="text-red-500">{contentError}</p>
+      <p className="text-red-500 ml-2">{contentError}</p>
       <textarea
+        ref={setTextareaRef}
         placeholder="Tell your story..."
         className="w-full min-h-screen bg-transparent resize-none py-2 text-xl font-medium px-3 text-gray-500 focus:outline-none"
         value={content}
