@@ -22,6 +22,7 @@ const AddPost = () => {
   const [subtitle, setSubtitle] = useState("");
   const [content, setContent] = useState("");
   const [tags, setTags] = useState([]);
+  const [contentToPublish, setContentToPublish] = useState("");
   // Used id's so I can work with them in writePanel.js
   const [availableTags] = useState([
     { text: "Coding", id: 0 },
@@ -148,19 +149,19 @@ const AddPost = () => {
                 {showHeadingMenu && (
                   <div className="absolute bg-blue-50 z-20 text-lg shadow-lg rounded-sm top-7 overflow-hidden">
                     <h2
-                      onClick={() => addContentFromBarButtons("#")}
+                      onClick={() => addContentFromBarButtons("# ")}
                       className="py-1 pl-2 pr-12 transition-all cursor-pointer hover:bg-blue-100"
                     >
                       H1
                     </h2>
                     <h2
-                      onClick={() => addContentFromBarButtons("##")}
+                      onClick={() => addContentFromBarButtons("## ")}
                       className="py-1 pl-2 pr-12 transition-all cursor-pointer hover:bg-blue-100"
                     >
                       H2
                     </h2>
                     <h2
-                      onClick={() => addContentFromBarButtons("###")}
+                      onClick={() => addContentFromBarButtons("### ")}
                       className="py-1 pl-2 pr-12 transition-all cursor-pointer hover:bg-blue-100"
                     >
                       H3
@@ -169,19 +170,19 @@ const AddPost = () => {
                 )}
               </span>
               <FormatBoldIcon
-                onClick={() => addContentFromBarButtons(" ** ** ")}
+                onClick={() => addContentFromBarButtons("**boldText**")}
                 className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200"
               />
               <FormatItalicIcon
-                onClick={() => addContentFromBarButtons(" * * ")}
+                onClick={() => addContentFromBarButtons(" *italicText* ")}
                 className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200"
               />
               <CodeIcon
-                onClick={() => addContentFromBarButtons("``` ```")}
+                onClick={() => addContentFromBarButtons("```code```")}
                 className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200"
               />
               <LinkIcon
-                onClick={() => addContentFromBarButtons(" (text)[link] ")}
+                onClick={() => addContentFromBarButtons(" [text](url) ")}
                 className="text-gray-500 cursor-pointer rounded-md ml-2 hover:bg-gray-200"
               />
             </div>
@@ -198,7 +199,12 @@ const AddPost = () => {
             setTextareaRef={setTextareaRef}
           />
         ) : activePanel === "Preview" ? (
-          <PreviewPanel />
+          <PreviewPanel
+            content={content}
+            setContentToPublish={setContentToPublish}
+            contentToPublish={contentToPublish}
+            subtitle={subtitle}
+          />
         ) : activePanel === "Guide" ? (
           <GuidePanel />
         ) : (

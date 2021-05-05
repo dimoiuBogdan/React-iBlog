@@ -52,7 +52,7 @@ const GuidePanel = () => {
           bold. We will use{" "}
           <span className="text-yellow-500">{`<strong>`}</span> while parsing.
           For example: <span className="font-semibold">**Bold text**</span>
-          <span className="mt-2">
+          <span className="mt-2 block">
             <span className="italic">Italics</span> : Wrap the text with single
             astricks character <span className="text-yellow-500">*</span> to
             make it italics. For example:{" "}

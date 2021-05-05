@@ -112,7 +112,7 @@ const WritePanel = ({
       <textarea
         ref={setTextareaRef}
         placeholder="Tell your story..."
-        className="w-full min-h-screen bg-transparent resize-none py-2 text-xl font-medium px-3 text-gray-500 focus:outline-none"
+        className="w-full min-h-screen bg-transparent resize-none py-2 text-xl leading-10 px-3 text-gray-500 focus:outline-none"
         value={content}
         onChange={updateContent}
       ></textarea>

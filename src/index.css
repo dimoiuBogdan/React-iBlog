@@ -37,3 +37,15 @@
 .active-link {
   @apply text-yellow-500 transform scale-110;
 }
+
+#preview h1 {
+  @apply text-4xl font-medium mb-4 text-gray-600;
+}
+
+#preview h2 {
+  @apply text-3xl font-medium mb-3 text-gray-600;
+}
+
+#preview h3 {
+  @apply text-2xl font-medium mb-2 text-gray-600;
+}

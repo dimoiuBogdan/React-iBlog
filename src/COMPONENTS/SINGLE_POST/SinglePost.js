@@ -43,7 +43,7 @@ const SinglePost = ({ allBlogs }) => {
   return (
     <div>
       {displayContent ? (
-        <div>
+        <div className="bg-blue-50 bg-opacity-50">
           <Navbar />
           <div
             className="w-full bg-center bg-cover relative h-60vh flex flex-col items-center justify-center"
@@ -83,7 +83,7 @@ const SinglePost = ({ allBlogs }) => {
                   </span>
                 </h2>
               </div>
-              <h2 className="text-center text-3xl font-medium text-gray-700 mb-3">
+              <h2 className="text-center text-4xl font-medium text-gray-700 mb-3">
                 {postDetails.subtitle || "Subtitle"}
               </h2>
               <p className="mb-14">{postDetails.content}</p>
