@@ -10,7 +10,7 @@ const PageNotFound = ({ user }) => {
         We could not find the page you are looking for
       </h2>
       <NavLink to={user ? "/homepage" : "/sign-in"}>
-        <button className="text-2xl font-medium bg-purple-200 w-max mx-auto px-5 py-3 rounded-lg shadow-lg hover:bg-purple-300 transition-all focus:outline-none">
+        <button className="text-2xl font-medium bg-blue-200 w-max mx-auto px-5 py-3 rounded-lg shadow-lg hover:bg-blue-300 transition-all focus:outline-none">
           {user ? "GO BACK HOME" : "GO TO LOGIN PAGE"}
         </button>
       </NavLink>
