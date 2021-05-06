@@ -58,7 +58,7 @@ const SinglePost = ({ allBlogs }) => {
               {postDetails.tags.map((tag, index) => (
                 <p
                   key={index}
-                  className="text-yellow-500 text-2xl font-medium mx-2"
+                  className="text-blue-400 text-2xl font-medium mx-2"
                 >
                   {tag}
                 </p>
@@ -70,15 +70,15 @@ const SinglePost = ({ allBlogs }) => {
               <div className="w-full justify-evenly flex-col md:flex-row lg:text-xl flex mx-0 text-lg text-gray-900 mb-8">
                 <h2>
                   Posted By :{" "}
-                  <span className="text-yellow-500">{postDetails.author}</span>
+                  <span className="text-blue-400">{postDetails.author}</span>
                 </h2>
                 <h2>
                   Reading Time :{" "}
-                  <span className="text-yellow-500">{readingTime}</span> minutes
+                  <span className="text-blue-400">{readingTime}</span> minutes
                 </h2>
                 <h2>
                   Date :{" "}
-                  <span className="text-yellow-500">
+                  <span className="text-blue-400">
                     {day}/{month}/{year}
                   </span>
                 </h2>
@@ -94,7 +94,7 @@ const SinglePost = ({ allBlogs }) => {
                 postID={postID}
               />
             </div>
-            <div className="w-1/5 text-center h-full hidden lg:block bg-yellow-500">
+            <div className="w-1/5 text-center h-full hidden lg:block bg-blue-400">
               Sidebar
             </div>
           </div>

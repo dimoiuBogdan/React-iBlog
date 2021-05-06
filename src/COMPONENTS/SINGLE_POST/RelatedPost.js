@@ -2,7 +2,7 @@ const RelatedPost = ({ blog }) => {
   return (
     <div className="shadow-lg mr-6 rounded-md mb-6 overflow-hidden md:w-96 sm:w-80 xs:w-full cursor-pointer">
       <div
-        className="h-52 w-full bg-cover bg-center border-b-2 border-yellow-500"
+        className="h-52 w-full bg-cover bg-center border-b-2 border-blue-400"
         style={{ backgroundImage: `url(${blog.image})` }}
       ></div>
       <div className="px-3">
@@ -12,7 +12,7 @@ const RelatedPost = ({ blog }) => {
         <p className="text-lg text-left h-36 overflow-hidden text-gray-500">
           {blog.content}
         </p>
-        <span className="text-yellow-500 font-medium transition-all hover:text-yellow-600 text-lg">
+        <span className="text-blue-400 font-medium transition-all hover:text-blue-400 text-lg">
           ... Read More
         </span>
         <div className="flex items-center border-t-2 border-gray-100 mt-1">

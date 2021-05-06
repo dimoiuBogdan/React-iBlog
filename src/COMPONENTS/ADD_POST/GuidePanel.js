@@ -48,17 +48,17 @@ const GuidePanel = () => {
         </h2>
         <p className="text-xl mb-4">
           <span className="font-semibold">Bold</span> : Wrap the text with
-          double astricks <span className="text-yellow-500">**</span> to make it
-          bold. We will use{" "}
-          <span className="text-yellow-500">{`<strong>`}</span> while parsing.
-          For example: <span className="font-semibold">**Bold text**</span>
+          double astricks <span className="text-blue-400">**</span> to make it
+          bold. We will use <span className="text-blue-400">{`<strong>`}</span>{" "}
+          while parsing. For example:{" "}
+          <span className="font-semibold">**Bold text**</span>
           <span className="mt-2 block">
             <span className="italic">Italics</span> : Wrap the text with single
-            astricks character <span className="text-yellow-500">*</span> to
-            make it italics. For example:{" "}
+            astricks character <span className="text-blue-400">*</span> to make
+            it italics. For example:{" "}
             <span className="italic">*Italic text*</span> . We will wrap the
-            text with <span className="text-yellow-500">{`<em>`}</span> tag
-            while parsing.
+            text with <span className="text-blue-400">{`<em>`}</span> tag while
+            parsing.
           </span>
         </p>
       </div>

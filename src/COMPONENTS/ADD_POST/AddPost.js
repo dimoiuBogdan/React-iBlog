@@ -1,6 +1,6 @@
 import Navbar from "../HOMEPAGE/Section Elements/Navbar";
 import useClickOutside from "../../HOOKS/useClickOutside";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 // Icons
 import PhotoIcon from "@material-ui/icons/Photo";
@@ -20,8 +20,10 @@ import GuidePanel from "./GuidePanel";
 const AddPost = () => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
+  // Writing section content ( unprocessed )
   const [content, setContent] = useState("");
   const [tags, setTags] = useState([]);
+  // Preview & publish content. Content after it was parsed (** , **** , ``````)
   const [contentToPublish, setContentToPublish] = useState("");
   // Used id's so I can work with them in writePanel.js
   const [availableTags] = useState([

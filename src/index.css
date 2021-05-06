@@ -23,19 +23,19 @@
 }
 
 ::selection {
-  @apply text-white bg-yellow-500;
+  @apply text-white bg-blue-400;
 }
 
 .active-badge {
-  @apply text-yellow-500 border-0;
+  @apply text-blue-400 border-0;
 }
 
 .outline {
-  @apply absolute top-0 left-0 w-full h-full border-2 border-yellow-500 rounded-full;
+  @apply absolute top-0 left-0 w-full h-full border-2 border-blue-400 rounded-full;
 }
 
 .active-link {
-  @apply text-yellow-500 transform scale-110;
+  @apply text-blue-400 transform scale-110;
 }
 
 #preview h1 {

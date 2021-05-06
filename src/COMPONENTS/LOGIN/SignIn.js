@@ -36,13 +36,13 @@ const SignIn = () => {
     >
       <div className="bg-gray-100 py-7 px-12 text-center shadow-lg border-r-4 border-b-4 border-blue-200 rounded-md">
         <h2 className="text-6xl font-semibold mb-2 text-gray-800">
-          Welcome To <span className="text-yellow-500">iBlog</span>
+          Welcome To <span className="text-blue-400">iBlog</span>
         </h2>
         <p className="mb-12 text-xl text-gray-500">
           Amazing Tech Articles Written By Amazing People
         </p>
         <button
-          className="mb-3 flex mx-auto items-center bg-yellow-500 text-white text-4xl px-5 py-2 rounded-md transition-all duration-300 shadow-md focus:outline-none hover:shadow-xl hover:text-yellow-500 hover:bg-opacity-0 hover:border-yellow-500 border-4"
+          className="mb-3 flex mx-auto items-center bg-blue-400 text-white text-4xl px-5 py-2 rounded-md transition-all duration-300 shadow-md focus:outline-none hover:shadow-xl hover:text-blue-400 hover:bg-opacity-0 hover:border-blue-400 border-4"
           onClick={signIn}
         >
           Sign In

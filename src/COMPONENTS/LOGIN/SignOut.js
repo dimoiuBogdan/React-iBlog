@@ -19,7 +19,7 @@ const SignOut = () => {
     auth.currentUser && (
       <div
         onClick={signOut}
-        className="bg-yellow-500 flex items-center shadow-md px-3 py-1 rounded-lg cursor-pointer hover:shadow-lg transition-all transform hover:text-yellow-500 hover:scale-105 hover:bg-opacity-0"
+        className="bg-blue-400 flex items-center shadow-md px-3 py-1 rounded-lg cursor-pointer hover:shadow-lg transition-all transform hover:text-blue-400 hover:scale-105 hover:bg-opacity-0"
       >
         Sign Out <LockIcon className="ml-1" />
       </div>

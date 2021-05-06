@@ -14,7 +14,6 @@ import {
   Redirect,
 } from "react-router-dom";
 import AddPost from "./COMPONENTS/ADD_POST/AddPost";
-import Navbar from "./COMPONENTS/HOMEPAGE/Section Elements/Navbar";
 // Component imports
 const SignIn = lazy(() => import("./COMPONENTS/LOGIN/SignIn"));
 const Blog = lazy(() => import("./COMPONENTS/Blog"));

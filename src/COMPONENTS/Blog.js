@@ -59,7 +59,7 @@ const Blog = ({ user, allBlogs }) => {
         <div className="container mx-auto flex items-center">
           {filteredBlogs && <HomepagePosts filteredBlogs={filteredBlogs} />}
           {filteredBlogs && (
-            <div className="w-1/5 text-center h-full hidden lg:block bg-yellow-50">
+            <div className="w-1/5 text-center h-full hidden lg:block bg-purple-50">
               Sidebar
             </div>
           )}

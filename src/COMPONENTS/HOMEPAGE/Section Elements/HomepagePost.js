@@ -9,7 +9,7 @@ const HomepagePost = ({ post }) => {
     <Link to={`/post/${id}`}>
       <div className="overflow-hidden bg-white rounded-lg shadow-lg cursor-pointer transition duration-300 hover:shadow-xl w-full h-full">
         <div
-          className="h-52 w-full bg-center bg-cover border-b-4 border-yellow-500"
+          className="h-52 w-full bg-center bg-cover border-b-4 border-blue-400"
           style={{ backgroundImage: `url(${image})` }}
         ></div>
         <div className="md:px-10 px-5 py-4">
@@ -23,7 +23,7 @@ const HomepagePost = ({ post }) => {
           <p className="text-gray-600 overflow-hidden text-justify h-48">
             {content}
           </p>
-          <span className="pl-2 text-yellow-500 font-medium transition-all hover:text-yellow-600">
+          <span className="pl-2 text-blue-400 font-medium transition-all hover:text-blue-400">
             ... Read More
           </span>
           <div className="bg-gray-100 h-0.5 my-3"></div>
