@@ -73,7 +73,13 @@ const App = () => {
                 component={() => <SinglePost allBlogs={allBlogs} />}
               />
             )}
-            {user && <Route path="/add-post" component={AddPost}></Route>}
+            {user && (
+              <Route
+                exact
+                path="/add-post"
+                component={() => <AddPost user={user} />}
+              ></Route>
+            )}
             <Route path="*">
               <PageNotFound user={user} />
             </Route>

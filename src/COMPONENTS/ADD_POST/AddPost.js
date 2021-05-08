@@ -1,6 +1,6 @@
 import Navbar from "../HOMEPAGE/Section Elements/Navbar";
 import useClickOutside from "../../HOOKS/useClickOutside";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Icons
 import PhotoIcon from "@material-ui/icons/Photo";
@@ -17,15 +17,15 @@ import WritePanel from "./WritePanel";
 import PreviewPanel from "./PreviewPanel";
 import GuidePanel from "./GuidePanel";
 
-const AddPost = () => {
+const AddPost = ({ user }) => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [tags, setTags] = useState([]);
   const [imageCover, setImageCover] = useState(null);
   // Preview & publish content. Content after it was parsed (** , **** , ``````)
   const [contentToPublish, setContentToPublish] = useState("");
-  const [postDate] = useState(new Date());
-  const [author, setAuthor] = useState("");
+  const [postDate] = useState(new Date().getTime());
+  const [author] = useState(user.displayName);
 
   // Writing section content ( unprocessed )
   const [content, setContent] = useState("");
@@ -60,7 +60,6 @@ const AddPost = () => {
       reader.onload = () => {
         setImageCover(reader.result);
         coverImageRef.current.src = reader.result;
-        console.log(imageCover);
       };
       reader.readAsDataURL(selectedFile);
     } else alert("File type not supported");
@@ -69,14 +68,18 @@ const AddPost = () => {
   const addContentFromBarButtons = (addedContent) => {
     const mouseStartPos = textareaRef.selectionStart;
     const mouseEndPos = textareaRef.selectionEnd;
+    // Add text where your mouse is in the textarea
     const updatedContent =
       content.substring(0, mouseStartPos) +
       addedContent +
       content.substring(mouseEndPos, content.length);
     setContent(updatedContent);
     textareaRef.focus();
-    textareaRef.setSelectionRange(2, 2);
   };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
 
   const updateTitle = (e) => {
     setTitle(e.target.value);
@@ -99,9 +102,50 @@ const AddPost = () => {
       : setContentError("");
   };
 
-  const postPost = () => {
-    console.log(imageCover);
+  const replaceCharactersWithTags = () => {
+    const htmlText = content
+      .replace(/^###(.*$)/gim, "<h3>$1</h3>")
+      .replace(/^##(.*$)/gim, "<h2>$1</h2>")
+      .replace(/^#(.*$)/gim, "<h1>$1</h1>")
+      .replace(/^-(.*$)/gim, "<li>$1</li>")
+      .replace(/\*\*(.*)\*\*/gim, "<b>$1</b>")
+      // s is to search on new lines too
+      .replace(/```(.*)```/gis, "<pre><code>$1</code></pre>")
+      .replace(/\*(.*)\*/gim, "<i>$1</i>")
+      .replace(/\[(.*?)\]\((.*?)\)/gim, "<a target='_blank' href='$2'>$1</a>");
+
+    setContentToPublish(htmlText);
   };
+
+  const [isOkayToPublish, setIsOkayToPublish] = useState(false);
+
+  useEffect(() => {
+    replaceCharactersWithTags();
+  }, [content]);
+
+  const checkForPostData = () => {
+    const allPostData = [
+      title,
+      subtitle,
+      tags,
+      imageCover,
+      contentToPublish,
+      postDate,
+      author,
+    ];
+    // Every data must be different than default
+    setIsOkayToPublish(
+      allPostData.every((data) => data) &&
+        !titleError &&
+        !subtitleError &&
+        !contentError &&
+        tags.length
+    );
+  };
+
+  useEffect(() => {
+    if (isOkayToPublish) alert("Okay");
+  }, [isOkayToPublish]);
 
   return (
     <div className="w-full min-h-screen bg-blue-50 bg-opacity-75">
@@ -118,7 +162,7 @@ const AddPost = () => {
             />
           </label>
           <button
-            onClick={postPost}
+            onClick={checkForPostData}
             className="font-medium text-xl text-gray-500 shadow-md px-3 py-1 rounded-md transition-all hover:shadow-lg"
           >
             <AddBoxIcon />
@@ -127,7 +171,7 @@ const AddPost = () => {
         </div>
         {imageCover && (
           <img
-            className="w-full object-cover mb-4 relative h-60vh flex flex-col items-center justify-center"
+            className="w-full object-cover mb-4 relative h-40rem flex flex-col items-center justify-center"
             ref={coverImageRef}
             src=""
             alt="cover"
@@ -244,6 +288,7 @@ const AddPost = () => {
             setContentToPublish={setContentToPublish}
             contentToPublish={contentToPublish}
             subtitle={subtitle}
+            replaceCharactersWithTags={replaceCharactersWithTags}
           />
         ) : activePanel === "Guide" ? (
           <GuidePanel />

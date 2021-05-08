@@ -16,6 +16,7 @@ const GuidePanel = () => {
             Title must be between 10 and 76 characters long
           </p>
           <p className="my-4">Content must have at least 700 characters</p>
+          <p className="my-4">Cover image must be JPG / PNG</p>
         </pre>
       </div>
       <div className="my-10">

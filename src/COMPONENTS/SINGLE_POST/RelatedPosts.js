@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import RelatedPost from "./RelatedPost";
 import { Link } from "react-router-dom";
 
-const RelatedPosts = ({ allBlogs, postTags, postID, getPostData }) => {
+const RelatedPosts = ({ allBlogs, postTags, postID }) => {
   const [relatedBlogsByTags, setRelatedBlogsByTags] = useState([]);
 
   const filterBlogsByTags = async (postID) => {
@@ -29,7 +29,7 @@ const RelatedPosts = ({ allBlogs, postTags, postID, getPostData }) => {
             key={index}
             to={blog.id}
             onClick={() => {
-              window.scrollTo({ top: 0, behavior: "smooth" });
+              window.scrollTo({ top: 0 });
             }}
           >
             <RelatedPost key={index} blog={blog} />
