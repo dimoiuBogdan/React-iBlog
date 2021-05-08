@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import hljs from "highlight.js/lib/core";
+import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
 
 const PreviewPanel = ({
@@ -24,7 +24,7 @@ const PreviewPanel = ({
       .replace(/\[(.*?)\]\((.*?)\)/gim, "<a target='_blank' href='$2'>$1</a>");
 
     setContentToPublish(htmlText);
-    hljs.highlightAll();
+    // Known error : this function works only the second time
   };
 
   const lookForHtml = () => {
@@ -32,6 +32,11 @@ const PreviewPanel = ({
       ? setHtmlError(true)
       : setHtmlError(false);
   };
+
+  // Without this function you have to go to preview section twice to parse the ```code```
+  useEffect(() => {
+    hljs.highlightAll();
+  }, [contentToPublish]);
 
   useEffect(() => {
     replaceCharactersWithTags();

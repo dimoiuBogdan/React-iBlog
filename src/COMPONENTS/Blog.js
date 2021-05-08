@@ -34,6 +34,7 @@ const Blog = ({ user, allBlogs }) => {
   };
 
   useEffect(() => {
+    // Get user from storage if logged in once
     const localStorageUserData = localStorage.getItem("user");
     if (!localStorageUserData)
       localStorage.setItem("user", JSON.stringify(user));

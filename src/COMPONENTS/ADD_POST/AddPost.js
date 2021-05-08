@@ -1,6 +1,6 @@
 import Navbar from "../HOMEPAGE/Section Elements/Navbar";
 import useClickOutside from "../../HOOKS/useClickOutside";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 // Icons
 import PhotoIcon from "@material-ui/icons/Photo";
@@ -20,11 +20,15 @@ import GuidePanel from "./GuidePanel";
 const AddPost = () => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
-  // Writing section content ( unprocessed )
-  const [content, setContent] = useState("");
   const [tags, setTags] = useState([]);
+  const [imageCover, setImageCover] = useState(null);
   // Preview & publish content. Content after it was parsed (** , **** , ``````)
   const [contentToPublish, setContentToPublish] = useState("");
+  const [postDate] = useState(new Date());
+  const [author, setAuthor] = useState("");
+
+  // Writing section content ( unprocessed )
+  const [content, setContent] = useState("");
   // Used id's so I can work with them in writePanel.js
   const [availableTags] = useState([
     { text: "Coding", id: 0 },
@@ -34,6 +38,7 @@ const AddPost = () => {
     { text: "Resources", id: 4 },
   ]);
   const [textareaRef, setTextareaRef] = useState(null);
+  const coverImageRef = useRef(null);
 
   const [titleError, setTitleError] = useState("");
   const [subtitleError, setSubtitleError] = useState("");
@@ -46,6 +51,20 @@ const AddPost = () => {
     isVisible: showHeadingMenu,
     setIsVisible: setShowHeadingMenu,
   } = useClickOutside(false);
+
+  const getImageFromInput = (e) => {
+    const allowedTypes = ["image/png", "image/jpeg"];
+    const selectedFile = e.target.files[0];
+    if (selectedFile && allowedTypes.includes(selectedFile.type)) {
+      let reader = new FileReader();
+      reader.onload = () => {
+        setImageCover(reader.result);
+        coverImageRef.current.src = reader.result;
+        console.log(imageCover);
+      };
+      reader.readAsDataURL(selectedFile);
+    } else alert("File type not supported");
+  };
 
   const addContentFromBarButtons = (addedContent) => {
     const mouseStartPos = textareaRef.selectionStart;
@@ -80,6 +99,10 @@ const AddPost = () => {
       : setContentError("");
   };
 
+  const postPost = () => {
+    console.log(imageCover);
+  };
+
   return (
     <div className="w-full min-h-screen bg-blue-50 bg-opacity-75">
       <Navbar solid />
@@ -88,13 +111,28 @@ const AddPost = () => {
           <label className="mr-8 font-medium text-lg text-gray-500 hover:bg-gray-200 rounded-md p-1 cursor-pointer transition-all">
             <PhotoIcon />
             <span>Add Cover Photo</span>
-            <input type="file" className="hidden" />
+            <input
+              onChange={getImageFromInput}
+              type="file"
+              className="hidden"
+            />
           </label>
-          <button className="font-medium text-xl text-gray-500 shadow-md px-3 py-1 rounded-md transition-all hover:shadow-lg">
+          <button
+            onClick={postPost}
+            className="font-medium text-xl text-gray-500 shadow-md px-3 py-1 rounded-md transition-all hover:shadow-lg"
+          >
             <AddBoxIcon />
             Post
           </button>
         </div>
+        {imageCover && (
+          <img
+            className="w-full object-cover mb-4 relative h-60vh flex flex-col items-center justify-center"
+            ref={coverImageRef}
+            src=""
+            alt="cover"
+          />
+        )}
         <input
           type="text"
           className="w-full bg-transparent py-2 font-medium focus:outline-none text-3xl text-gray-600"
