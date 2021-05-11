@@ -12,9 +12,7 @@ const PreviewPanel = ({
   const [htmlError, setHtmlError] = useState(false);
 
   const lookForHtml = () => {
-    content.search("</div>" || "</span>") !== -1
-      ? setHtmlError(true)
-      : setHtmlError(false);
+    content.search("</") !== -1 ? setHtmlError(true) : setHtmlError(false);
   };
 
   // Without this function you have to go to preview section twice to parse the ```code```
@@ -52,13 +50,3 @@ const PreviewPanel = ({
 };
 
 export default PreviewPanel;
-
-/*
-# Test
-**SalCf**
-##Test
- [aeldra](https://aeldra.to/UserCP) 
-###Test
- *Manevra*
-```  const [htmlError, setHtmlError] = useState(false);```
-*/

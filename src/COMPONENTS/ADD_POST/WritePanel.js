@@ -11,6 +11,7 @@ const WritePanel = ({
   setTags,
   availableTags,
   setTextareaRef,
+  replaceCharactersWithTags,
 }) => {
   const [errorModal, setErrorModal] = useState("");
 
@@ -115,6 +116,7 @@ const WritePanel = ({
         className="w-full min-h-screen bg-transparent resize-none py-2 text-xl leading-10 px-3 text-gray-500 focus:outline-none"
         value={content}
         onChange={updateContent}
+        onBlur={replaceCharactersWithTags}
       ></textarea>
     </div>
   );

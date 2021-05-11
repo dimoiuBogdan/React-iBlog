@@ -119,10 +119,6 @@ const AddPost = ({ user }) => {
 
   const [isOkayToPublish, setIsOkayToPublish] = useState(false);
 
-  useEffect(() => {
-    replaceCharactersWithTags();
-  }, [content]);
-
   const checkForPostData = () => {
     const allPostData = [
       title,
@@ -133,6 +129,7 @@ const AddPost = ({ user }) => {
       postDate,
       author,
     ];
+    console.log(allPostData);
     // Every data must be different than default
     setIsOkayToPublish(
       allPostData.every((data) => data) &&
@@ -281,6 +278,7 @@ const AddPost = ({ user }) => {
             contentError={contentError}
             content={content}
             setTextareaRef={setTextareaRef}
+            replaceCharactersWithTags={replaceCharactersWithTags}
           />
         ) : activePanel === "Preview" ? (
           <PreviewPanel

@@ -23,7 +23,7 @@ const GuidePanel = () => {
         <h2 className="text-3xl font-medium text-gray-700 mb-2">Headers</h2>
         <p className="text-xl mb-4">
           We support Atx-style headers. Use 1-3 hash characters at the start of
-          the line, corresponding to header leves 1-3. For example:
+          the line, corresponding to header levels 1-3. For example:
         </p>
         <pre className="bg-gray-600 text-white text-lg py-4 px-6 rounded-lg shadow-md">
           <p className="my-4"># This is Heading 1</p>
@@ -49,13 +49,13 @@ const GuidePanel = () => {
         </h2>
         <p className="text-xl mb-4">
           <span className="font-semibold">Bold</span> : Wrap the text with
-          double astricks <span className="text-blue-400">**</span> to make it
+          double asterisks <span className="text-blue-400">**</span> to make it
           bold. We will use <span className="text-blue-400">{`<strong>`}</span>{" "}
           while parsing. For example:{" "}
           <span className="font-semibold">**Bold text**</span>
           <span className="mt-2 block">
             <span className="italic">Italics</span> : Wrap the text with single
-            astricks character <span className="text-blue-400">*</span> to make
+            asterisks character <span className="text-blue-400">*</span> to make
             it italics. For example:{" "}
             <span className="italic">*Italic text*</span> . We will wrap the
             text with <span className="text-blue-400">{`<em>`}</span> tag while

@@ -49,3 +49,11 @@
 #preview h3 {
   @apply text-2xl font-medium mb-2 text-gray-600;
 }
+
+#preview a {
+  @apply text-blue-600 hover:text-blue-500;
+}
+
+pre {
+  @apply my-4;
+}

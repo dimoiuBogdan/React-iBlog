@@ -7,6 +7,9 @@ import useDateTime from "../../HOOKS/useToDateTime";
 import Navbar from "../HOMEPAGE/Section Elements/Navbar";
 import RelatedPosts from "./RelatedPosts";
 
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-dark.css";
+
 const SinglePost = ({ allBlogs }) => {
   const db = firebase.firestore();
   const postID = useRouteMatch("/post/:id").params.id;
@@ -15,6 +18,10 @@ const SinglePost = ({ allBlogs }) => {
   const [readingTime, setReadingTime] = useState(5);
   const { year, month, day } = useDateTime(postDetails.date);
   const averageWordsPerMinute = 250;
+
+  useEffect(() => {
+    hljs.highlightAll();
+  }, [displayContent]);
 
   // use postID as a param so that everytime we click on a post, it will use that ID
   // ( figured it out after working on related posts where blog.id was the actual post and postID was the post we clicked on )
@@ -43,7 +50,7 @@ const SinglePost = ({ allBlogs }) => {
   return (
     <div>
       {displayContent ? (
-        <div className="bg-blue-50 bg-opacity-50">
+        <div className="bg-blue-50 bg-opacity-50 min-h-screen">
           <Navbar />
           <div
             className="w-full bg-center bg-cover relative h-60vh flex flex-col items-center justify-center"
@@ -65,7 +72,7 @@ const SinglePost = ({ allBlogs }) => {
               ))}
             </div>
           </div>
-          <div className="container mx-auto my-4 md:my-8 lg:my-12 text-gray-500 text-xl leading-10 text-justify flex items-center justify-evenly">
+          <div className="container mx-auto py-4 md:py-8 lg:py-12 text-gray-500 text-xl leading-10 text-justify flex items-center justify-evenly">
             <div className="w-4/5 lg:px-10vw">
               <div className="w-full justify-evenly flex-col md:flex-row lg:text-xl flex mx-0 text-lg text-gray-900 mb-8">
                 <h2>
@@ -79,14 +86,20 @@ const SinglePost = ({ allBlogs }) => {
                 <h2>
                   Date :{" "}
                   <span className="text-blue-400">
-                    {day}/{month}/{year}
+                    {month}/{day}/{year}
                   </span>
                 </h2>
               </div>
               <h2 className="text-center text-4xl font-medium text-gray-700 mb-3">
                 {postDetails.subtitle || "Subtitle"}
               </h2>
-              <p className="mb-14">{postDetails.content}</p>
+              <div
+                className="break-words mb-14"
+                // Set HTML as DOM
+                dangerouslySetInnerHTML={{
+                  __html: postDetails.content || "Loading...",
+                }}
+              ></div>
               <RelatedPosts
                 getPostData={getPostData}
                 allBlogs={allBlogs}
