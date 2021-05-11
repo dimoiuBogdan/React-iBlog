@@ -67,7 +67,7 @@ const SinglePost = ({ allBlogs }) => {
                   key={index}
                   className="text-blue-400 text-2xl font-medium mx-2"
                 >
-                  {tag}
+                  {tag.text}
                 </p>
               ))}
             </div>

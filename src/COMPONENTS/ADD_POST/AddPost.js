@@ -126,13 +126,14 @@ const AddPost = ({ user }) => {
       title,
       subtitle,
       tags,
-      imageCover,
-      contentToPublish,
-      postDate,
+      image: imageCover,
+      content: contentToPublish,
+      date: postDate,
       author,
     };
     // Every data must be different than default
     const isOkay =
+      // Check for every item in the allPostData object to have a value
       Object.values(allPostData).every((data) => data) &&
       !titleError &&
       !subtitleError &&

@@ -7,7 +7,7 @@ const HomepagePost = ({ post }) => {
 
   return (
     <Link to={`/post/${id}`}>
-      <div className="overflow-hidden bg-white rounded-lg shadow-lg cursor-pointer transition duration-300 hover:shadow-xl w-full h-full">
+      <div className="overflow-hidden break-words bg-white rounded-lg shadow-lg cursor-pointer transition duration-300 hover:shadow-xl w-full h-full">
         <div
           className="h-52 w-full bg-center bg-cover border-b-4 border-blue-400"
           style={{ backgroundImage: `url(${image})` }}
@@ -30,7 +30,7 @@ const HomepagePost = ({ post }) => {
           <div className="flex items-center">
             {tags.map((tag, index) => (
               <h3 key={index} className="text-gray-400 pr-2">
-                {tag}
+                {tag.text}
               </h3>
             ))}
           </div>
