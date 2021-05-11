@@ -17,6 +17,10 @@ import WritePanel from "./WritePanel";
 import PreviewPanel from "./PreviewPanel";
 import GuidePanel from "./GuidePanel";
 
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+
 const AddPost = ({ user }) => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
@@ -117,10 +121,8 @@ const AddPost = ({ user }) => {
     setContentToPublish(htmlText);
   };
 
-  const [isOkayToPublish, setIsOkayToPublish] = useState(false);
-
   const checkForPostData = () => {
-    const allPostData = [
+    const allPostData = {
       title,
       subtitle,
       tags,
@@ -128,21 +130,28 @@ const AddPost = ({ user }) => {
       contentToPublish,
       postDate,
       author,
-    ];
-    console.log(allPostData);
+    };
     // Every data must be different than default
-    setIsOkayToPublish(
-      allPostData.every((data) => data) &&
-        !titleError &&
-        !subtitleError &&
-        !contentError &&
-        tags.length
-    );
+    const isOkay =
+      Object.values(allPostData).every((data) => data) &&
+      !titleError &&
+      !subtitleError &&
+      !contentError &&
+      tags.length;
+    if (isOkay) {
+      const db = firebase.firestore();
+      const batch = db.batch();
+      const docRef = db.collection("all-blogs").doc(); //automatically generate unique id
+      batch.set(docRef, allPostData);
+      batch.commit();
+      setTitle("");
+      setSubtitle("");
+      setTags([]);
+      setImageCover("");
+      setContentToPublish("");
+      setContent("");
+    } else alert("Fill all the fields");
   };
-
-  useEffect(() => {
-    if (isOkayToPublish) alert("Okay");
-  }, [isOkayToPublish]);
 
   return (
     <div className="w-full min-h-screen bg-blue-50 bg-opacity-75">
