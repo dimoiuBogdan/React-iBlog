@@ -8,7 +8,6 @@ const ProfilePage = ({ user, allBlogs }) => {
 
   const getMyPosts = () => {
     const myID = user.uid;
-    setMyPosts(allBlogs.filter((blog) => blog.authorID === myID));
   };
 
   useEffect(() => {
@@ -54,10 +53,12 @@ const ProfilePage = ({ user, allBlogs }) => {
               </div>
               <div>
                 {currentPage === "myPosts"
-                  ? myPosts.map((myPost) => <myPostProfile />) ||
-                    "You did not post anything yet..."
-                  : likedPosts.map((likedPost) => <likedPostProfile />) ||
-                    "You did not like any post yet..."}
+                  ? myPosts.length > 0
+                    ? myPosts.map((myPost) => <myPostProfile />)
+                    : "You did not post anything yet..."
+                  : likedPosts.length > 0
+                  ? likedPosts.map((likedPost) => <likedPostProfile />)
+                  : "You did not like any post yet..."}
               </div>
             </div>
           </div>

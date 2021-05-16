@@ -8,7 +8,7 @@ const Filters = lazy(() => import("./HOMEPAGE/Sections/Filters.js"));
 const HomepagePosts = lazy(() => import("./HOMEPAGE/Sections/HomepagePosts"));
 const MainSection = lazy(() => import("./HOMEPAGE/Sections/MainSection.js"));
 
-const Blog = ({ user, allBlogs }) => {
+const Blog = ({ user, allBlogs, allUsersRef }) => {
   const [currentFilter, setCurrentFilter] = useState("");
   const [filteredBlogs, setFilteredBlogs] = useState([]);
 
@@ -21,7 +21,6 @@ const Blog = ({ user, allBlogs }) => {
               blog.tags.find((tag) => tag.text === currentFilter)
             )
           );
-    console.log(allBlogs);
   };
 
   const useQuery = () => {
@@ -36,11 +35,26 @@ const Blog = ({ user, allBlogs }) => {
     queryFilter ? setCurrentFilter(queryFilter) : setCurrentFilter("All");
   };
 
+  const createNewUserInDB = () => {
+    const currentUserData = allUsersRef.doc(user.uid);
+    !currentUserData &&
+      currentUserData.set({
+        name: user.displayName,
+        id: user.uid,
+        email: user.email,
+        myPosts: [],
+        likedPosts: [],
+      });
+  };
+
   useEffect(() => {
     // Get user from storage if logged in once
     const localStorageUserData = localStorage.getItem("user");
     if (!localStorageUserData)
       localStorage.setItem("user", JSON.stringify(user));
+
+    // Add user to db ( happens only once per user thanks to firebase )
+    createNewUserInDB();
   }, [user]);
 
   useEffect(() => {

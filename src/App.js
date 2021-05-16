@@ -45,6 +45,7 @@ const App = () => {
 
   const firestore = firebase.firestore();
   const allBlogsRef = firestore.collection("all-blogs");
+  const allUsersRef = firestore.collection("users");
   const query = allBlogsRef.orderBy("date");
   const [allBlogs] = useCollectionDataOnce(query, { idField: "id" });
 
@@ -56,11 +57,17 @@ const App = () => {
             {user ? (
               <Route
                 path="/homepage"
-                component={() => <Blog user={user} allBlogs={allBlogs} />}
+                component={() => (
+                  <Blog
+                    user={user}
+                    allUsersRef={allUsersRef}
+                    allBlogs={allBlogs}
+                  />
+                )}
                 exact
               />
             ) : (
-              <Route path="/sign-in" component={SignIn} />
+              <Route path="/sign-in" component={() => <SignIn />} />
             )}
             {user ? (
               <Redirect exact from="/" to="/homepage" />

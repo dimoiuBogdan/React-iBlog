@@ -141,12 +141,14 @@ const AddPost = ({ user }) => {
       !subtitleError &&
       !contentError &&
       tags.length;
+    const db = firebase.firestore();
+    const batch = db.batch();
+    const allBlogsRef = db.collection("all-blogs").doc(); //automatically generate unique id
     if (isOkay) {
-      const db = firebase.firestore();
-      const batch = db.batch();
-      const docRef = db.collection("all-blogs").doc(); //automatically generate unique id
-      batch.set(docRef, allPostData);
+      batch.set(allBlogsRef, allPostData);
       batch.commit();
+      addPostToMyPostsInDB(allPostData);
+      // Set fields and data to initial value ( empty )
       setTitle("");
       setSubtitle("");
       setTags([]);
@@ -154,6 +156,20 @@ const AddPost = ({ user }) => {
       setContentToPublish("");
       setContent("");
     } else alert("Fill all the fields");
+  };
+
+  const addPostToMyPostsInDB = (allPostData) => {
+    const db = firebase.firestore();
+    const currentUserRef = db.collection("users").doc(user.uid);
+    currentUserRef
+      .get()
+      .then((doc) => {
+        currentUserRef.update({
+          myPosts: [...doc.data().myPosts, allPostData],
+        });
+      })
+      .catch((err) => alert(err));
+    console.log("sal");
   };
 
   return (
