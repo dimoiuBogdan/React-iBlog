@@ -17,8 +17,11 @@ const Blog = ({ user, allBlogs }) => {
       currentFilter === "All"
         ? setFilteredBlogs(allBlogs)
         : setFilteredBlogs(
-            allBlogs.filter((blog) => blog.tags.includes(currentFilter))
+            allBlogs.filter((blog) =>
+              blog.tags.find((tag) => tag.text === currentFilter)
+            )
           );
+    console.log(allBlogs);
   };
 
   const useQuery = () => {

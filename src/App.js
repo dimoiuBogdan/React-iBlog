@@ -14,6 +14,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import AddPost from "./COMPONENTS/ADD_POST/AddPost";
+import ProfilePage from "./COMPONENTS/PROFILE/ProfilePage";
 // Component imports
 const SignIn = lazy(() => import("./COMPONENTS/LOGIN/SignIn"));
 const Blog = lazy(() => import("./COMPONENTS/Blog"));
@@ -78,6 +79,15 @@ const App = () => {
                 exact
                 path="/add-post"
                 component={() => <AddPost user={user} />}
+              ></Route>
+            )}
+            {user && (
+              <Route
+                exact
+                path="/profile"
+                component={() => (
+                  <ProfilePage user={user} allBlogs={allBlogs} />
+                )}
               ></Route>
             )}
             <Route path="*">

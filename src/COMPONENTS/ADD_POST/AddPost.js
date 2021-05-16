@@ -30,6 +30,7 @@ const AddPost = ({ user }) => {
   const [contentToPublish, setContentToPublish] = useState("");
   const [postDate] = useState(new Date().getTime());
   const [author] = useState(user.displayName);
+  const [authorID] = useState(user.uid);
 
   // Writing section content ( unprocessed )
   const [content, setContent] = useState("");
@@ -130,6 +131,7 @@ const AddPost = ({ user }) => {
       content: contentToPublish,
       date: postDate,
       author,
+      authorID,
     };
     // Every data must be different than default
     const isOkay =
