@@ -169,7 +169,6 @@ const AddPost = ({ user }) => {
         });
       })
       .catch((err) => alert(err));
-    console.log("sal");
   };
 
   return (
