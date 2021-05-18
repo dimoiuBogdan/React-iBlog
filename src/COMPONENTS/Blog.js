@@ -2,6 +2,9 @@
 import { useLocation } from "react-router-dom";
 import { useState, useEffect, lazy, Suspense } from "react";
 
+import firebase from "firebase/app";
+import "firebase/firestore";
+
 // Components
 const Navbar = lazy(() => import("./HOMEPAGE/Section Elements/Navbar"));
 const Filters = lazy(() => import("./HOMEPAGE/Sections/Filters.js"));
@@ -36,15 +39,19 @@ const Blog = ({ user, allBlogs, allUsersRef }) => {
   };
 
   const createNewUserInDB = () => {
-    const currentUserData = allUsersRef.doc(user.uid);
-    !currentUserData &&
-      currentUserData.set({
-        name: user.displayName,
-        id: user.uid,
-        email: user.email,
-        myPosts: [],
-        likedPosts: [],
-      });
+    const db = firebase.firestore();
+    const currentUserData = db.collection("users").doc(user.uid);
+    currentUserData.get().then((userData) => {
+      // If there is no data for the user with this ID, we create a default user object
+      !userData.data() &&
+        db.collection("users").doc(user.uid).set({
+          name: user.displayName,
+          id: user.uid,
+          email: user.email,
+          myPosts: [],
+          likedPosts: [],
+        });
+    });
   };
 
   useEffect(() => {
@@ -53,7 +60,6 @@ const Blog = ({ user, allBlogs, allUsersRef }) => {
     if (!localStorageUserData)
       localStorage.setItem("user", JSON.stringify(user));
 
-    // Add user to db ( happens only once per user thanks to firebase )
     createNewUserInDB();
   }, [user]);
 
