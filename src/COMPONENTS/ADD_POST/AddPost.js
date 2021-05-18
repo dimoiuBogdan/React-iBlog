@@ -18,10 +18,11 @@ import PreviewPanel from "./PreviewPanel";
 import GuidePanel from "./GuidePanel";
 
 import firebase from "firebase/app";
-import "firebase/auth";
 import "firebase/firestore";
+import "firebase/storage";
+import "firebase/analytics";
 
-const AddPost = ({ user }) => {
+const AddPost = ({ user, storage }) => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [tags, setTags] = useState([]);
@@ -58,15 +59,13 @@ const AddPost = ({ user }) => {
   } = useClickOutside(false);
 
   const getImageFromInput = (e) => {
+    const storageRef = firebase.storage.ref();
+    const imagesRef = storageRef.child("images");
+
     const allowedTypes = ["image/png", "image/jpeg"];
     const selectedFile = e.target.files[0];
     if (selectedFile && allowedTypes.includes(selectedFile.type)) {
-      let reader = new FileReader();
-      reader.onload = () => {
-        setImageCover(reader.result);
-        coverImageRef.current.src = reader.result;
-      };
-      reader.readAsDataURL(selectedFile);
+      console.log(storage);
     } else alert("File type not supported");
   };
 
@@ -136,6 +135,7 @@ const AddPost = ({ user }) => {
       authorID,
       id: randomID,
     };
+
     // Every data must be different than default
     const isOkay =
       // Check for every item in the allPostData object to have a value
@@ -144,11 +144,11 @@ const AddPost = ({ user }) => {
       !subtitleError &&
       !contentError &&
       tags.length;
-    const batch = db.batch();
-    const allBlogsRef = db.collection("all-blogs").doc(randomID);
     if (isOkay) {
-      batch.set(allBlogsRef, allPostData);
-      batch.commit();
+      // Add Post to DB
+      const batch = db.batch();
+      const allBlogsRef = db.collection("all-blogs").doc(randomID);
+      batch.set(allBlogsRef, allPostData).commit();
       addPostToMyPostsInDB(allPostData);
       // Set fields and data to initial value ( empty )
       setTitle("");
