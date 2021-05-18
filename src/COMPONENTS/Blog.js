@@ -11,7 +11,7 @@ const Filters = lazy(() => import("./HOMEPAGE/Sections/Filters.js"));
 const HomepagePosts = lazy(() => import("./HOMEPAGE/Sections/HomepagePosts"));
 const MainSection = lazy(() => import("./HOMEPAGE/Sections/MainSection.js"));
 
-const Blog = ({ user, allBlogs, allUsersRef }) => {
+const Blog = ({ user, allBlogs }) => {
   const [currentFilter, setCurrentFilter] = useState("");
   const [filteredBlogs, setFilteredBlogs] = useState([]);
 

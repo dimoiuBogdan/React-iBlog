@@ -1,13 +1,16 @@
 import useToDateTime from "../../../HOOKS/useToDateTime";
 import { Link } from "react-router-dom";
 
-const HomepagePost = ({ post }) => {
+const HomepagePost = ({ post, profile }) => {
   const { title, image, content, tags, date, author, id } = post;
   const { year, month, day } = useToDateTime(date);
 
   return (
     <Link to={`/post/${id}`}>
-      <div className="overflow-hidden break-words bg-white rounded-lg shadow-lg cursor-pointer transition duration-300 hover:shadow-xl w-full h-full">
+      <div
+        className={`overflow-hidden break-words bg-white rounded-lg shadow-lg cursor-pointer transition duration-300 hover:shadow-xl
+         ${profile ? "w-1/3" : "w-full h-full"} `}
+      >
         <div
           className="h-52 w-full bg-center bg-cover border-b-4 border-blue-400"
           style={{ backgroundImage: `url(${image})` }}

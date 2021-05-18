@@ -123,6 +123,8 @@ const AddPost = ({ user }) => {
   };
 
   const checkForPostData = () => {
+    const db = firebase.firestore();
+    const randomID = db.collection("all-blogs").doc().id;
     const allPostData = {
       title,
       subtitle,
@@ -132,6 +134,7 @@ const AddPost = ({ user }) => {
       date: postDate,
       author,
       authorID,
+      id: randomID,
     };
     // Every data must be different than default
     const isOkay =
@@ -141,9 +144,8 @@ const AddPost = ({ user }) => {
       !subtitleError &&
       !contentError &&
       tags.length;
-    const db = firebase.firestore();
     const batch = db.batch();
-    const allBlogsRef = db.collection("all-blogs").doc(); //automatically generate unique id
+    const allBlogsRef = db.collection("all-blogs").doc(randomID);
     if (isOkay) {
       batch.set(allBlogsRef, allPostData);
       batch.commit();
