@@ -12,7 +12,7 @@ const HomepagePost = ({ post, profile }) => {
     >
       <div className="overflow-hidden break-words w-full bg-white rounded-lg shadow-lg cursor-pointer transition duration-300 hover:shadow-xl">
         <div
-          className="h-52 w-full bg-center bg-cover border-b-4 border-blue-400"
+          className="h-72 w-full bg-center bg-cover border-b-4 border-blue-400"
           style={{ backgroundImage: `url(${image})` }}
         ></div>
         <div className="md:px-10 px-5 py-4">

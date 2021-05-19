@@ -73,7 +73,7 @@ const SinglePost = ({ allBlogs }) => {
             </div>
           </div>
           <div className="container mx-auto py-4 md:py-8 lg:py-12 text-gray-500 text-xl leading-10 text-justify flex items-center justify-evenly">
-            <div className="w-4/5 lg:px-10vw">
+            <div className="w-full lg:px-10vw">
               <div className="w-full justify-evenly flex-col md:flex-row lg:text-xl flex mx-0 text-lg text-gray-900 mb-8">
                 <h2>
                   Posted By :{" "}
@@ -106,9 +106,6 @@ const SinglePost = ({ allBlogs }) => {
                 postTags={postDetails.tags}
                 postID={postID}
               />
-            </div>
-            <div className="w-1/5 text-center h-full hidden lg:block bg-blue-400">
-              Sidebar
             </div>
           </div>
         </div>

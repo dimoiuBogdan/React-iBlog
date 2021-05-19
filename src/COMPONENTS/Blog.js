@@ -82,11 +82,6 @@ const Blog = ({ user, allBlogs }) => {
       <Suspense fallback="Loading Content...">
         <div className="container mx-auto flex items-center">
           {filteredBlogs && <HomepagePosts filteredBlogs={filteredBlogs} />}
-          {filteredBlogs && (
-            <div className="w-1/5 text-center h-full hidden lg:block bg-purple-50">
-              Sidebar
-            </div>
-          )}
         </div>
       </Suspense>
     </div>
