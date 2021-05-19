@@ -26,7 +26,7 @@ const AddPost = ({ user, storage }) => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [tags, setTags] = useState([]);
-  const [imageCover, setImageCover] = useState(null);
+  const [imageCover, setImageCover] = useState("");
   // Preview & publish content. Content after it was parsed (** , **** , ``````)
   const [contentToPublish, setContentToPublish] = useState("");
   const [postDate] = useState(new Date().getTime());
@@ -44,7 +44,6 @@ const AddPost = ({ user, storage }) => {
     { text: "Resources", id: 4 },
   ]);
   const [textareaRef, setTextareaRef] = useState(null);
-  const coverImageRef = useRef(null);
 
   const [titleError, setTitleError] = useState("");
   const [subtitleError, setSubtitleError] = useState("");
@@ -58,15 +57,22 @@ const AddPost = ({ user, storage }) => {
     setIsVisible: setShowHeadingMenu,
   } = useClickOutside(false);
 
-  const getImageFromInput = (e) => {
-    const storageRef = firebase.storage.ref();
-    const imagesRef = storageRef.child("images");
-
-    const allowedTypes = ["image/png", "image/jpeg"];
+  const getImageFromInput = async (e) => {
     const selectedFile = e.target.files[0];
+    const allowedTypes = ["image/png", "image/jpeg"];
+
+    // Upload files variables
+    const storageRef = firebase.storage().ref();
+    const fileRef = storageRef.child(selectedFile.name);
+
     if (selectedFile && allowedTypes.includes(selectedFile.type)) {
-      console.log(storage);
-    } else alert("File type not supported");
+      // Upload files function
+      await fileRef.put(selectedFile);
+      // Get files function
+      setImageCover(await fileRef.getDownloadURL());
+    } else if (!allowedTypes.includes(selectedFile.type))
+      alert("File type not supported");
+    else if (!selectedFile) alert("Please choose a file");
   };
 
   const addContentFromBarButtons = (addedContent) => {
@@ -198,8 +204,7 @@ const AddPost = ({ user, storage }) => {
         {imageCover && (
           <img
             className="w-full object-cover mb-4 relative h-40rem flex flex-col items-center justify-center"
-            ref={coverImageRef}
-            src=""
+            src={imageCover}
             alt="cover"
           />
         )}
