@@ -58,12 +58,12 @@ const SignIn = () => {
               aria-controls="panel1bh-content"
               id="panel1bh-header"
             >
-              <Typography>General settings</Typography>
+              <Typography>What is this project?</Typography>
             </AccordionSummary>
             <AccordionDetails className="text-left">
               <Typography>
-                Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
-                feugiat. Aliquam eget maximus est, id dignissim quam.
+                This is my first big project in React. It's a blog website where
+                people can post anything.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -76,13 +76,12 @@ const SignIn = () => {
               aria-controls="panel2bh-content"
               id="panel2bh-header"
             >
-              <Typography>Users</Typography>
+              <Typography>Features</Typography>
             </AccordionSummary>
             <AccordionDetails className="text-left">
               <Typography>
-                Donec placerat, lectus sed mattis semper, neque lectus feugiat
-                lectus, varius pulvinar diam eros in elit. Pellentesque
-                convallis laoreet laoreet.
+                Authentication, Adding Posts, Reading Posts, Adding headings,
+                code, links, lists, etc.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -95,32 +94,12 @@ const SignIn = () => {
               aria-controls="panel3bh-content"
               id="panel3bh-header"
             >
-              <Typography>Advanced settings</Typography>
+              <Typography>Tools I Used</Typography>
             </AccordionSummary>
             <AccordionDetails className="text-left">
               <Typography>
-                Nunc vitae orci ultricies, auctor nunc in, volutpat nisl.
-                Integer sit amet egestas eros, vitae egestas augue. Duis vel est
-                augue.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion
-            expanded={expanded === "panel4"}
-            onChange={handleChange("panel4")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel4bh-content"
-              id="panel4bh-header"
-            >
-              <Typography>Personal data</Typography>
-            </AccordionSummary>
-            <AccordionDetails className="text-left">
-              <Typography>
-                Nunc vitae orci ultricies, auctor nunc in, volutpat nisl.
-                Integer sit amet egestas eros, vitae egestas augue. Duis vel est
-                augue.
+                React, TailwindCSS, Firebase, React-Router, MaterialUI, Custom
+                Hooks, Local Storage, HighlightJS.
               </Typography>
             </AccordionDetails>
           </Accordion>

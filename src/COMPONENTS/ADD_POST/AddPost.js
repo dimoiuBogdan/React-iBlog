@@ -1,6 +1,6 @@
 import Navbar from "../HOMEPAGE/Section Elements/Navbar";
 import useClickOutside from "../../HOOKS/useClickOutside";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 // Icons
 import PhotoIcon from "@material-ui/icons/Photo";

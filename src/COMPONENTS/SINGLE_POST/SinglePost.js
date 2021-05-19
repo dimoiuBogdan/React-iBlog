@@ -94,6 +94,7 @@ const SinglePost = ({ allBlogs }) => {
                 {postDetails.subtitle || "Subtitle"}
               </h2>
               <div
+                id="preview"
                 className="break-words mb-14"
                 // Set HTML as DOM
                 dangerouslySetInnerHTML={{
