@@ -32,22 +32,24 @@ const ProfilePage = ({ user, allBlogs }) => {
     <div>
       <Navbar solid />
       {allBlogs && (
-        <div className="w-full min-h-screen bg-blue-50 bg-opacity-50 flex items-center justify-center">
-          <div className="overflow-hidden container flex p-2 md:w-3/4 w-full shadow-md bg-blue-50 rounded-sm">
-            <div className="w-1/4 bg-blue-50 border-r-2 border-blue-100 text-gray-600 flex flex-col items-center justify-center">
+        <div className="w-full min-h-screen pt-14 bg-blue-50 bg-opacity-50 flex items-center justify-center">
+          <div className="overflow-hidden container flex p-2 w-full shadow-md sm:flex-row flex-col rounded-sm bg-blue-50">
+            <div className="lg:w-1/4 sm:w-1/2 font-medium text-lg bg-blue-50 border-r-2 border-blue-100 text-gray-600 flex flex-col items-center justify-center">
               <img
                 src={user.photoURL}
                 alt="profile"
                 className="object-cover rounded-full mb-3 h-26"
               />
               <h3>Name: {user.displayName}</h3>
-              <a href={`mailto:${user.email}`}>Email: {user.email}</a>
+              <a className="text-center" href={`mailto:${user.email}`}>
+                Email: {user.email}
+              </a>
               <a href={`tel:${user.phoneNumber}`}>
                 Phone: {user.phoneNumber || "-"}
               </a>
             </div>
-            <div className="w-3/4 pl-2">
-              <div className="text-center text-lg font-medium flex justify-center text-gray-600 mb-3">
+            <div className="sm:w-3/4 sm:pl-2 w-full">
+              <div className="text-center text-xl font-medium flex justify-center text-gray-600 my-4">
                 <h3
                   onClick={() => setCurrentPage("likedPosts")}
                   className={`${
@@ -65,11 +67,11 @@ const ProfilePage = ({ user, allBlogs }) => {
                   My Posts
                 </h3>
               </div>
-              <div>
+              <div className="flex flex-wrap h-36rem overflow-y-scroll">
                 {currentPage === "myPosts"
                   ? myPosts.length > 0
                     ? myPosts.map((myPost) => (
-                        <HomepagePost profile post={myPost} key={myPost.date} />
+                        <HomepagePost profile post={myPost} key={myPost.id} />
                       ))
                     : "You did not post anything yet..."
                   : likedPosts.length > 0

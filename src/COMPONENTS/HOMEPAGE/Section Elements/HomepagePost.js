@@ -6,11 +6,11 @@ const HomepagePost = ({ post, profile }) => {
   const { year, month, day } = useToDateTime(date);
 
   return (
-    <Link to={`/post/${id}`}>
-      <div
-        className={`overflow-hidden break-words bg-white rounded-lg shadow-lg cursor-pointer transition duration-300 hover:shadow-xl
-         ${profile ? "w-1/3" : "w-full h-full"} `}
-      >
+    <Link
+      className={`${post ? "xl:w-1/3 lg:w-1/2 w-full px-2 pb-4" : ""}`}
+      to={`/post/${id}`}
+    >
+      <div className="overflow-hidden break-words w-full bg-white rounded-lg shadow-lg cursor-pointer transition duration-300 hover:shadow-xl">
         <div
           className="h-52 w-full bg-center bg-cover border-b-4 border-blue-400"
           style={{ backgroundImage: `url(${image})` }}

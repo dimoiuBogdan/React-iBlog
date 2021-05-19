@@ -69,7 +69,9 @@ const AddPost = ({ user, storage }) => {
       // Upload files function
       await fileRef.put(selectedFile);
       // Get files function
-      setImageCover(await fileRef.getDownloadURL());
+      setImageCover(
+        await fileRef.getDownloadURL().catch((err) => console.log(err))
+      );
     } else if (!allowedTypes.includes(selectedFile.type))
       alert("File type not supported");
     else if (!selectedFile) alert("Please choose a file");
