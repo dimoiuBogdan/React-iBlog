@@ -16,10 +16,11 @@
 }
 
 #main-section {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
     url("./IMAGES/aerial-view-man-using-computer-laptop-wooden-table.jpg");
   background-size: cover;
   background-position: center;
+  border-bottom: 2px solid rgb(96, 165, 250);
 }
 
 ::selection {

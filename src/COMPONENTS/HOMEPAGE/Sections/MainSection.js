@@ -8,7 +8,7 @@ const MainSection = () => {
         <span className="text-blue-400">Amazing</span> Tech Articles Written By{" "}
         <span className="text-blue-400">Amazing</span> People
       </h2>
-      <h3 className="text-white text-opacity-80 sm:text-2xl text-xl">
+      <h3 className="text-white text-center sm:text-2xl text-xl">
         Coding - Crpyto - Design - Stocks - News
       </h3>
     </div>

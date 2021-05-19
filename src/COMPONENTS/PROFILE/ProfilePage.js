@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Navbar from "../HOMEPAGE/Section Elements/Navbar";
-import LikedPostsProfile from "./LikedPostsProfile";
 
 import HomepagePost from "../HOMEPAGE/Section Elements/HomepagePost";
 
@@ -9,7 +8,6 @@ import "firebase/firestore";
 
 const ProfilePage = ({ user, allBlogs }) => {
   const [myPosts, setMyPosts] = useState([]);
-  const [likedPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState("myPosts");
 
   // This is getMyPosts() function but for some reason it does not work if I use it as a function inside useEffect(). Will have to research more this "return"
@@ -49,15 +47,7 @@ const ProfilePage = ({ user, allBlogs }) => {
               </a>
             </div>
             <div className="sm:w-3/4 sm:pl-2 w-full">
-              <div className="text-center text-xl font-medium flex justify-center text-gray-600 my-4">
-                <h3
-                  onClick={() => setCurrentPage("likedPosts")}
-                  className={`${
-                    currentPage === "likedPosts" ? "text-blue-500" : ""
-                  } px-3 cursor-pointer transition-all hover:text-blue-500 border-r-2 border-blue-100`}
-                >
-                  Liked Posts
-                </h3>
+              <div className="text-center text-2xl font-medium flex justify-center text-gray-600 my-4">
                 <h3
                   onClick={() => setCurrentPage("myPosts")}
                   className={`${
@@ -68,15 +58,11 @@ const ProfilePage = ({ user, allBlogs }) => {
                 </h3>
               </div>
               <div className="flex flex-wrap h-36rem overflow-y-scroll">
-                {currentPage === "myPosts"
-                  ? myPosts.length > 0
-                    ? myPosts.map((myPost) => (
-                        <HomepagePost profile post={myPost} key={myPost.id} />
-                      ))
-                    : "You did not post anything yet..."
-                  : likedPosts.length > 0
-                  ? likedPosts.map((likedPost) => <LikedPostsProfile />)
-                  : "You did not like any post yet..."}
+                {myPosts.length > 0
+                  ? myPosts.map((myPost) => (
+                      <HomepagePost profile post={myPost} key={myPost.id} />
+                    ))
+                  : "You did not post anything yet..."}
               </div>
             </div>
           </div>
