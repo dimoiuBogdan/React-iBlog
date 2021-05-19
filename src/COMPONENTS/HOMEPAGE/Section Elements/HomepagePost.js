@@ -1,7 +1,7 @@
 import useToDateTime from "../../../HOOKS/useToDateTime";
 import { Link } from "react-router-dom";
 
-const HomepagePost = ({ post, profile }) => {
+const HomepagePost = ({ post }) => {
   const { title, image, content, tags, date, author, id } = post;
   const { year, month, day } = useToDateTime(date);
 
@@ -23,9 +23,12 @@ const HomepagePost = ({ post, profile }) => {
           <div className="font-medium text-xl h-8 overflow-hidden w-max max-w-full text-gray-600">
             {title}
           </div>
-          <p className="text-gray-600 overflow-hidden text-justify h-48">
-            {content}
-          </p>
+          <p
+            className="text-gray-600 overflow-hidden text-justify h-48"
+            dangerouslySetInnerHTML={{
+              __html: content || "Loading...",
+            }}
+          ></p>
           <span className="pl-2 text-blue-400 font-medium transition-all hover:text-blue-400">
             ... Read More
           </span>
